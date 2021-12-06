@@ -23,11 +23,7 @@ public class gvController {
 	
 	@GetMapping("/list")
 	public String getAllGv (HttpServletRequest request) {
-		List<Gv> rs = new ArrayList<>();
-		rs = igvservice.getAllGv();
-		for (Gv value : rs){
-			System.out.println(value.getHoTenGv());
-		}
+		List<Gv> rs = igvservice.getAllGv();
 		request.setAttribute("rs", rs);
 		return "home";
 	}
