@@ -2,10 +2,10 @@ package com.pj3.Project3.service;
 
 import java.util.List;
 
+import com.pj3.Project3.model.giaoVien;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.pj3.Project3.model.Gv;
 import com.pj3.Project3.repository.IGvRepository;
 
 
@@ -16,34 +16,34 @@ public class GvService implements IGvService {
 	public IGvRepository gvrepository;
 	
 	@Override
-	public Gv addGv(Gv gv) {
-		if (gv != null) {
-			return gvrepository.save(gv);
+	public giaoVien addGv(giaoVien giaoVien) {
+		if (giaoVien != null) {
+			return gvrepository.save(giaoVien);
 		}
 		return null;
 	}
 
 	@Override
-	public List<Gv> getAllGv() {
+	public List<giaoVien> getAllGv() {
 		return gvrepository.findAll();
 	}
 
 	@Override
-	public Gv getById(long maGv) {
+	public giaoVien getById(long maGv) {
 		return gvrepository.getById(maGv);
 	}
 
 	@Override
-	public Gv updateGv(long maGv, Gv gv) {
-		Gv gvbyid = gvrepository.getById(maGv);
+	public giaoVien updateGv(long maGv, giaoVien gv) {
+		giaoVien gvbyid = gvrepository.getById(maGv);
 		if (gvbyid != null) {
 			gvbyid.setHoTenGv(gv.getHoTenGv());
 			gvbyid.setEmailGv(gv.getEmailGv());
 			gvbyid.setMatKhauGv(gv.getMatKhauGv());
 			gvbyid.setNgaySinh(gv.getNgaySinh());
-			gvbyid.setGioiTinh(gv.isGioiTinh());
+			gvbyid.setGioiTinh(gv.getGioiTinh());
 			gvbyid.setSdt(gv.getSdt());
-			gvbyid.setQuyen(gv.isQuyen());
+			gvbyid.setQuyen(gv.getQuyen());
 			
 			return gvrepository.save(gvbyid);
 		}
@@ -53,9 +53,9 @@ public class GvService implements IGvService {
 	@Override
 	public boolean deleteGv(long maGv) {
 		if (maGv >= 1) {
-			Gv gv = gvrepository.getById(maGv);
-			if (gv!= null) {
-				gvrepository.delete(gv);
+			giaoVien giaoVien = gvrepository.getById(maGv);
+			if (giaoVien!= null) {
+				gvrepository.delete(giaoVien);
 				return true;
 			}
 		}
