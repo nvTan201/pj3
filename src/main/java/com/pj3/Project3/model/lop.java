@@ -19,8 +19,8 @@ public class lop {
     public lop() {
     }
 
-    public lop(Long maLop, String tenLop, int khoa) {
-        this.maLop = maLop;
+    public lop(String tenLop, int khoa) {
+
         this.tenLop = tenLop;
         this.khoa = khoa;
     }

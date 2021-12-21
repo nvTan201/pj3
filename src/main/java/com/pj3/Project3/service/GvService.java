@@ -14,7 +14,13 @@ public class GvService implements IGvService {
 
 	@Autowired
 	public IGvRepository gvrepository;
-	
+
+
+	@Override
+	public giaoVien login(String email, String pass) {
+		return null;
+	}
+
 	@Override
 	public giaoVien addGv(giaoVien giaoVien) {
 		if (giaoVien != null) {

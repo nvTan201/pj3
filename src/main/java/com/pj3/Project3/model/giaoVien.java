@@ -33,8 +33,8 @@ public class giaoVien {
     public giaoVien() {
     }
 
-    public giaoVien(long maGv, String hoTenGv, String ngaySinh, int gioiTinh, String emailGv, String matKhauGv, int sdt, int quyen) {
-        this.maGv = maGv;
+    public giaoVien(String hoTenGv, String ngaySinh, int gioiTinh, String emailGv, String matKhauGv, int sdt, int quyen) {
+
         this.hoTenGv = hoTenGv;
         this.ngaySinh = ngaySinh;
         this.gioiTinh = gioiTinh;

@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Quản lý học sinh</title>
+</head>
+<body>
+<div class="content-wrapper" layout:fragment="content" >
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="">
+                        <a th:href="@{/hoc-sinh/add}" class="btn btn-block bg-gradient-success btn-sm">
+                            thêm
+                            <i class="fas fa-plus"></i>
+                        </a>
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Danh Sách Học Sinh</h3>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+            <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Stt</th>
+                        <th>Họ Tên</th>
+                        <th>Ngày Sinh</th>
+                        <th>Giới Tính</th>
+                        <th>Email</th>
+                        <th>Sdt</th>
+                        <th>Lớp</th>
+                        <th style="color: #FFD700">Sửa</th>
+                        <th style="color: #FF0000">Xóa</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="rs , item : ${rs}">
+                        <th th:text = "${item.index+1}"></th>
+                        <th th:text = "${rs.hoTenHs}"></th>
+                        <th th:text = "${rs.ngaySinh}"></th>
+                        <th th:text = "${rs.gioiTinh}"></th>
+                        <th th:text = "${rs.emailHs}"></th>
+                        <th th:text = "${rs.sdt}"></th>
+                        <th th:text = "${rs.maLop}"></th>
+                        <th style="color: #FFD700"><a th:href="@{/}"><i class="fas fa-edit"></i></a></th>
+                        <th style="color: #FF0000"><a th:href="@{/}"><i class="fas fa-user-times"></i></a></th>
+                    </tr>
+                </tbody>
+                    <tr>
+                        <th>Stt</th>
+                        <th>Họ Tên</th>
+                        <th>Ngày Sinh</th>
+                        <th>Giới Tính</th>
+                        <th>Email</th>
+                        <th>Sdt</th>
+                        <th>Lớp</th>
+                        <th style="color: #FFD700">Sửa</th>
+                        <th style="color: #FF0000">Xóa</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        <!-- /.card-body -->
+    </div>
+</div>
+</body>
+</html>

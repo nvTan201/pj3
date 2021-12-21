@@ -33,8 +33,8 @@ public class hocSinh {
     public hocSinh() {
     }
 
-    public hocSinh(Long maHs, String hoTenHs, String ngaySinh, int gioiTinh, String emailHs, String matKhauHs, String sdt, int maLop) {
-        this.maHs = maHs;
+    public hocSinh( String hoTenHs, String ngaySinh, int gioiTinh, String emailHs, String matKhauHs, String sdt, int maLop) {
+
         this.hoTenHs = hoTenHs;
         this.ngaySinh = ngaySinh;
         this.gioiTinh = gioiTinh;

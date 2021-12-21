@@ -5,6 +5,10 @@ import com.pj3.Project3.model.giaoVien;
 import java.util.List;
 
 public interface IGvService {
+
+	//login
+	public giaoVien login(String email, String pass);
+
 	//them 
 	public giaoVien addGv(giaoVien giaoVien);
 	

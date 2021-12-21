@@ -11,7 +11,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>home</title>
 </head>
 <body>
 <div class="content-wrapper" layout:fragment="content" >
@@ -36,14 +36,7 @@
     <section class="content">
         <div class="container-fluid">
 
-            <table>
-                <tr th:each="rs : ${rs}">
-                    <th th:text="${rs.hoTenHs}"></th>
-                </tr>
-            </table>
-
-
-            Info boxes
+            Giáo Viên
             <div class="row">
                 <div class="col-12 col-sm-6 col-md-3">
                     <div class="info-box">
@@ -56,12 +49,41 @@
                     <small>%</small>
                   </span>
                         </div>
-                        <!-- /.info-box-content -->
                     </div>
-                    <!-- /.info-box -->
                 </div>
             </div>
-            <!--/. container-fluid -->
+            Học Sinh
+            <div class="row">
+                <div class="col-12 col-sm-6 col-md-3">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cog"></i></span>
+
+                        <div class="info-box-content">
+                            <span class="info-box-text">CPU Traffic</span>
+                            <span class="info-box-number">
+                    10
+                    <small>%</small>
+                  </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            Môn Học
+            <div class="row">
+                <div class="col-12 col-sm-6 col-md-3">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cog"></i></span>
+
+                        <div class="info-box-content">
+                            <span class="info-box-text">CPU Traffic</span>
+                            <span class="info-box-number">
+                    10
+                    <small>%</small>
+                  </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
     <!-- /.content -->
