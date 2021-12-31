@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface IHsService {
     public List<hocSinh> getAllHs();
+
+    public hocSinh addHs(hocSinh hocSinh);
 }

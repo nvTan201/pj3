@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}"
+>
+<head>
+<head>
+    <meta charset="UTF-8">
+    <title>Thêm học sinh</title>
+</head>
+<body>
+    <div class="content-wrapper" layout:fragment="content" >
+        <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title">Thêm Sinh Viên</h3>
+            </div>
+            <!-- /.card-header -->
+            <!-- form start -->
+            <form th:action="@{hoc-sinh/add}" method="post">
+                <div class="card-body">
+                    <div class="form-group">
+                        <label>Họ và Tên</label>
+                        <input type="email" class="form-control" name="name" placeholder="Họ Tên">
+                    </div>
+                    <div class="form-group">
+                        <label>Ngày Sinh</label>
+                        <input type="date" class="form-control" name="date" placeholder="Ngày Sinh">
+                    </div>
+                    <div class="form-group">
+                        <label>Giới Tính</label>
+                        <br>
+                        <input type="radio" name="gioiTinh" value="1">Nam
+                        <br>
+                        <input type="radio" name="gioiTinh" value="0">nu
+                    </div>
+                    <div class="form-group">
+                        <label>Sdt</label>
+                        <input type="number" class="form-control" name="sdt" placeholder="Số Điện Thoại">
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" class="form-control" name="email" placeholder="Enter email">
+                    </div>
+                    <input type="hidden" name="pass" value="1">
+
+                    <div class="form-group">
+                        <label>lớp</label>
+                        <select class="form-control select2" style="width: 100%;">
+                            <option disabled selected="selected">chọn lớp</option>
+
+                            <option th:each="rs , item:${rs}" th:value="${rs.maLop}" th:utext="${rs.tenKhoa}">
+
+                            </option>
+                        </select>
+                    </div>
+                    <div class="form-check">
+                        <but class="btn btn-primary">Thêm</but>
+                    </div>
+                </div>
+                <!-- /.card-body -->
+            </form>
+        </div>
+    </div>
+</body>
+</html>

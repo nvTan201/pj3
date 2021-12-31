@@ -11,13 +11,22 @@
     <title>AdminLTE 3 | Dashboard 2</title>
 
     <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet" th:href="@{https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback}">
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" th:href="@{/plugins/fontawesome-free/css/all.min.css}">
-    <!-- overlayScrollbars -->
-    <link rel="stylesheet" th:href="@{/plugins/overlayScrollbars/css/OverlayScrollbars.min.css}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" th:href="@{../plugins/fontawesome-free/css/all.min.css}">
     <!-- Theme style -->
-    <link rel="stylesheet" th:href="@{/dist/css/adminlte.min.css}">
+    <link rel="stylesheet" th:href="@{../dist/css/adminlte.min.css}">
+
+<!--    &lt;!&ndash; SweetAlert2 &ndash;&gt;-->
+<!--    <link rel="stylesheet" th:href="@{../plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css}">-->
+<!--    &lt;!&ndash; Toastr &ndash;&gt;-->
+<!--    <link rel="stylesheet" th:href="@{../plugins/toastr/toastr.min.css}">-->
+
+    <!-- DataTables -->
+    <link rel="stylesheet" th:href="@{../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css}">
+    <link rel="stylesheet" th:href="@{../plugins/datatables-responsive/css/responsive.bootstrap4.min.css}">
+    <link rel="stylesheet" th:href="@{../plugins/datatables-buttons/css/buttons.bootstrap4.min.css}">
+
 </head>
 <body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
 
@@ -32,6 +41,9 @@
     <ul class="navbar-nav">
         <li class="nav-item">
             <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <h5 class="nav-link">Quản Lý Sinh Viên</h5>
         </li>
     </ul>
 
@@ -100,7 +112,7 @@
                     </a>
                 </li>
                 <li class="nav-item menu-open">
-                    <a href="#" class="nav-link">
+                    <a th:href="@{../mh/index}" class="nav-link">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
                             Quản Lý Môn Học
@@ -166,28 +178,59 @@
     </div>
 </footer>
 
-<!-- REQUIRED SCRIPTS -->
+<script layout:fragment="javaSript">
+
+</script>
+
 <!-- jQuery -->
-<script th:src="@{/plugins/jquery/jquery.min.js}"></script>
-<!-- Bootstrap -->
-<script th:src="@{/plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
-<!-- overlayScrollbars -->
-<script th:src="@{/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js}"></script>
+<script th:src="@{../plugins/jquery/jquery.min.js}"></script>
+
+<!-- Bootstrap 4 -->
+<script th:src="@{../plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
+
+<!--&lt;!&ndash; SweetAlert2 &ndash;&gt;-->
+<!--<script th:src="@{../plugins/sweetalert2/sweetalert2.min.js}"></script>-->
+<!--&lt;!&ndash; Toastr &ndash;&gt;-->
+<!--<script th:src="@{../plugins/toastr/toastr.min.js}"></script>-->
+
+<!-- DataTables  & Plugins -->
+<script th:src="@{../plugins/datatables/jquery.dataTables.min.js}"></script>
+<script th:src="@{../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js}"></script>
+<script th:src="@{../plugins/datatables-responsive/js/dataTables.responsive.min.js}"></script>
+<script th:src="@{../plugins/datatables-responsive/js/responsive.bootstrap4.min.js}"></script>
+<script th:src="@{../plugins/datatables-buttons/js/dataTables.buttons.min.js}"></script>
+<script th:src="@{../plugins/datatables-buttons/js/buttons.bootstrap4.min.js}"></script>
+<script th:src="@{../plugins/jszip/jszip.min.js}"></script>
+<script th:src="@{../plugins/pdfmake/pdfmake.min.js}"></script>
+<script th:src="@{../plugins/pdfmake/vfs_fonts.js}"></script>
+<script th:src="@{../plugins/datatables-buttons/js/buttons.html5.min.js}"></script>
+<script th:src="@{../plugins/datatables-buttons/js/buttons.print.min.js}"></script>
+<script th:src="@{../plugins/datatables-buttons/js/buttons.colVis.min.js}"></script>
 <!-- AdminLTE App -->
-<script th:src="@{/dist/js/adminlte.js}"></script>
-
-<!-- PAGE PLUGINS -->
-<!-- jQuery Mapael -->
-<script th:src="@{/plugins/jquery-mousewheel/jquery.mousewheel.js}"></script>
-<script th:src="@{/plugins/raphael/raphael.min.js}"></script>
-<script th:src="@{/plugins/jquery-mapael/jquery.mapael.min.js}"></script>
-<script th:src="@{/plugins/jquery-mapael/maps/usa_states.min.js}"></script>
-<!-- ChartJS -->
-<script th:src="@{/plugins/chart.js/Chart.min.js}"></script>
-
+<script th:src="@{../dist/js/adminlte.min.js}"></script>
 <!-- AdminLTE for demo purposes -->
-<script th:src="@{/dist/js/demo.js}"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script th:src="@{/dist/js/pages/dashboard2.js}"></script>
+<script th:src="@{../dist/js/demo.js}"></script>
+<!-- Page specific script -->
+<script>
+    $(function () {
+      $("#example1").DataTable({
+        "responsive": true, "lengthChange": false, "autoWidth": false
+      }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+      $('#example2').DataTable({
+        "paging": true,
+        "lengthChange": false,
+        "searching": false,
+        "ordering": true,
+        "info": true,
+        "autoWidth": false,
+        "responsive": true,
+      });
+    });
+  </script>
+
+<span layout:fragment="modal">
+
+</span>
+
 </body>
 </html>

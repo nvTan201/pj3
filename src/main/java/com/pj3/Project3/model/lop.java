@@ -14,7 +14,13 @@ public class lop {
     private String tenLop;
 
     @Column(name = "khoa")
+//    @OneToMany
+//    @JoinColumn(name = "khoa")
     private int khoa;
+
+//    @ManyToOne
+//    @JoinColumn(name = "idKhoa")
+//    khoa Khoa;
 
     public lop() {
     }

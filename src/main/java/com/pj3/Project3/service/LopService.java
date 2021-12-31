@@ -15,6 +15,6 @@ public class LopService implements ILopService{
 
     @Override
     public List<lop> getAllLop() {
-        return iLopRepository.findAll();
+        return iLopRepository.findAllLop();
     }
 }

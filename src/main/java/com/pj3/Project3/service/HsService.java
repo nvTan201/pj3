@@ -17,4 +17,14 @@ public class HsService implements IHsService{
     public List<hocSinh> getAllHs() {
         return iHsRepository.findAll();
     }
+
+    @Override
+    public hocSinh addHs(hocSinh hocSinh) {
+        if(hocSinh != null){
+            return iHsRepository.save(hocSinh);
+        }
+        return null;
+    }
+
+
 }

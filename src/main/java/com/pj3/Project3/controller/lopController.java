@@ -1,5 +1,6 @@
 package com.pj3.Project3.controller;
 
+import com.pj3.Project3.dto.findAllClass;
 import com.pj3.Project3.model.lop;
 import com.pj3.Project3.service.ILopService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +16,9 @@ public class lopController {
     @Autowired
     public ILopService iLopService;
 
-    @RequestMapping("/list")
-    public List<lop> getAllLop(){
-        return iLopService.getAllLop();
-    }
+//    @RequestMapping("/list")
+//    public List<findAllClass> getAllLop(){
+//
+//        return iLopService.getAllLop();
+//    }
 }

@@ -12,30 +12,34 @@
 </head>
 <body>
 <div class="content-wrapper" layout:fragment="content" >
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-            </div>
-            <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                    <li class="">
-                        <a th:href="@{/hoc-sinh/add}" class="btn btn-block bg-gradient-success btn-sm">
-                            thêm
-                            <i class="fas fa-plus"></i>
-                        </a>
-                    </li>
-                </ol>
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                </div>
+                <div class="col-sm-6">
+                    <ol class="float-sm-right">
+                        <ul class="">
+                            <br>
+                            <a th:href="@{/hoc-sinh/add}" class="btn bg-gradient-success btn-sm">
+                                thêm
+                                <i class="fas fa-plus"></i>
+                            </a>
+                        </ul>
+                    </ol>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="card">
-        <div class="card-header">
-            <h3 class="card-title">Danh Sách Học Sinh</h3>
-        </div>
-        <!-- /.card-header -->
-        <div class="card-body">
-            <table id="example1" class="table table-bordered table-striped">
-                <thead>
+    </section>
+    <section class="content">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Danh sách học sinh</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                <table id="example1" class="table table-bordered table-striped">
+                    <thead>
                     <tr>
                         <th>Stt</th>
                         <th>Họ Tên</th>
@@ -47,8 +51,8 @@
                         <th style="color: #FFD700">Sửa</th>
                         <th style="color: #FF0000">Xóa</th>
                     </tr>
-                </thead>
-                <tbody>
+                    </thead>
+                    <tbody>
                     <tr th:each="rs , item : ${rs}">
                         <th th:text = "${item.index+1}"></th>
                         <th th:text = "${rs.hoTenHs}"></th>
@@ -57,10 +61,11 @@
                         <th th:text = "${rs.emailHs}"></th>
                         <th th:text = "${rs.sdt}"></th>
                         <th th:text = "${rs.maLop}"></th>
-                        <th style="color: #FFD700"><a th:href="@{/}"><i class="fas fa-edit"></i></a></th>
-                        <th style="color: #FF0000"><a th:href="@{/}"><i class="fas fa-user-times"></i></a></th>
+                        <th><a th:href="@{/}" align="center"><i class="fas fa-edit" style="color: #FFD700"></i></a></th>
+                        <th><a th:href="@{/}" align="center"><i class="fas fa-user-times" style="color: #FF0000"></i></a></th>
                     </tr>
-                </tbody>
+                    </tbody>
+                    <tfoot>
                     <tr>
                         <th>Stt</th>
                         <th>Họ Tên</th>
@@ -72,11 +77,12 @@
                         <th style="color: #FFD700">Sửa</th>
                         <th style="color: #FF0000">Xóa</th>
                     </tr>
-                </tfoot>
-            </table>
+                    </tfoot>
+                </table>
+            </div>
+            <!-- /.card-body -->
         </div>
-        <!-- /.card-body -->
-    </div>
+    </section>
 </div>
 </body>
 </html>
