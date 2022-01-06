@@ -8,7 +8,7 @@
 >
 <head>
     <meta charset="UTF-8">
-    <title>Quản lý học sinh</title>
+    <title>Title</title>
 </head>
 <body>
 <div class="content-wrapper" layout:fragment="content" >
@@ -21,7 +21,7 @@
                     <ol class="float-sm-right">
                         <ul class="">
                             <br>
-                            <a th:href="@{/hoc-sinh/add}" class="btn bg-gradient-success btn-sm">
+                            <a th:href="@{/}" class="btn bg-gradient-success btn-sm">
                                 thêm
                                 <i class="fas fa-plus"></i>
                             </a>
@@ -47,7 +47,7 @@
                         <th>Giới Tính</th>
                         <th>Email</th>
                         <th>Sdt</th>
-                        <th>Lớp</th>
+                        <th>Trạng Thái</th>
                         <th style="color: #FFD700">Sửa</th>
                         <th style="color: #FF0000">Xóa</th>
                     </tr>
@@ -55,12 +55,12 @@
                     <tbody>
                     <tr th:each="rs , item : ${rs}">
                         <th th:text = "${item.index+1}"></th>
-                        <th th:text = "${rs.getHo_ten_hs()}"></th>
-                        <th th:text = "${rs.getNgay_sinh()}"></th>
-                        <th th:text = "${rs.getGioi_tinh()==1?'Nam':'Nữ'}"></th>
-                        <th th:text = "${rs.getEmail_hs()}"></th>
-                        <th th:text = "${rs.getSdt()}"></th>
-                        <th th:text = "${rs.getTen_lop()}"></th>
+                        <th th:text = "${rs.hoTenGv}"></th>
+                        <th th:text = "${rs.ngaySinh}"></th>
+                        <th th:text = "${rs.gioiTinh}"></th>
+                        <th th:text = "${rs.emailGv}"></th>
+                        <th th:text = "${rs.sdt}"></th>
+                        <th></th>
                         <th><a th:href="@{/}" align="center"><i class="fas fa-edit" style="color: #FFD700"></i></a></th>
                         <th><a th:href="@{/}" align="center"><i class="fas fa-user-times" style="color: #FF0000"></i></a></th>
                     </tr>
@@ -73,7 +73,7 @@
                         <th>Giới Tính</th>
                         <th>Email</th>
                         <th>Sdt</th>
-                        <th>Lớp</th>
+                        <th>Trạng Thái</th>
                         <th style="color: #FFD700">Sửa</th>
                         <th style="color: #FF0000">Xóa</th>
                     </tr>

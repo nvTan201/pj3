@@ -1,19 +1,24 @@
 package com.pj3.Project3.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "hocsinh")
 public class hocSinh {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "maHs")
     private Long maHs;
 
-    @Column(name = "hoTenHs")
+    @Column(name = "hoTenHs", length = 100)
     private String hoTenHs;
 
     @Column(name = "ngaySinh")
-    private String ngaySinh;
+    @Temporal(TemporalType.DATE)
+    private Date ngaySinh;
 
     @Column(name = "gioiTinh")
     private int gioiTinh;
@@ -27,21 +32,25 @@ public class hocSinh {
     @Column(name = "sdt")
     private String sdt;
 
-    @Column(name = "maLop")
-    private int maLop;
+    @Column(name = "trangThai")
+    private int trangThai;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "maLop")
+    private lop lop;
 
     public hocSinh() {
     }
 
-    public hocSinh( String hoTenHs, String ngaySinh, int gioiTinh, String emailHs, String matKhauHs, String sdt, int maLop) {
-
+    public hocSinh(String hoTenHs, Date ngaySinh, int gioiTinh, String emailHs, String matKhauHs, String sdt, int trangThai, com.pj3.Project3.model.lop lop) {
         this.hoTenHs = hoTenHs;
         this.ngaySinh = ngaySinh;
         this.gioiTinh = gioiTinh;
         this.emailHs = emailHs;
         this.matKhauHs = matKhauHs;
         this.sdt = sdt;
-        this.maLop = maLop;
+        this.trangThai = trangThai;
+        this.lop = lop;
     }
 
     public Long getMaHs() {
@@ -60,11 +69,11 @@ public class hocSinh {
         this.hoTenHs = hoTenHs;
     }
 
-    public String getNgaySinh() {
+    public Date getNgaySinh() {
         return ngaySinh;
     }
 
-    public void setNgaySinh(String ngaySinh) {
+    public void setNgaySinh(Date ngaySinh) {
         this.ngaySinh = ngaySinh;
     }
 
@@ -100,11 +109,19 @@ public class hocSinh {
         this.sdt = sdt;
     }
 
-    public int getMaLop() {
-        return maLop;
+    public int getTrangThai() {
+        return trangThai;
     }
 
-    public void setMaLop(int maLop) {
-        this.maLop = maLop;
+    public void setTrangThai(int trangThai) {
+        this.trangThai = trangThai;
+    }
+
+    public com.pj3.Project3.model.lop getLop() {
+        return lop;
+    }
+
+    public void setLop(com.pj3.Project3.model.lop lop) {
+        this.lop = lop;
     }
 }

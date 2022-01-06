@@ -1,6 +1,8 @@
 package com.pj3.Project3.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "lop")
@@ -8,34 +10,35 @@ public class lop {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "maLop")
     private long maLop;
 
     @Column(name = "tenLop")
     private String tenLop;
 
-    @Column(name = "khoa")
-//    @OneToMany
-//    @JoinColumn(name = "khoa")
-    private int khoa;
+    @ManyToOne()
+    @JoinColumn(name="idKhoa")
+    private khoa khoa;
 
-//    @ManyToOne
-//    @JoinColumn(name = "idKhoa")
-//    khoa Khoa;
+    @OneToMany(mappedBy = "lop")
+    private List<hocSinh> hocSinhs = new ArrayList<>();
+
+    @OneToMany(mappedBy = "lop")
+    private List<giangDay> giangDays = new ArrayList<>();
 
     public lop() {
     }
 
-    public lop(String tenLop, int khoa) {
-
+    public lop(String tenLop, com.pj3.Project3.model.khoa khoa) {
         this.tenLop = tenLop;
         this.khoa = khoa;
     }
 
-    public Long getMaLop() {
+    public long getMaLop() {
         return maLop;
     }
 
-    public void setMaLop(Long maLop) {
+    public void setMaLop(long maLop) {
         this.maLop = maLop;
     }
 
@@ -47,11 +50,15 @@ public class lop {
         this.tenLop = tenLop;
     }
 
-    public int getKhoa() {
+    public com.pj3.Project3.model.khoa getKhoa() {
         return khoa;
     }
 
-    public void setKhoa(int khoa) {
+    public void setKhoa(com.pj3.Project3.model.khoa khoa) {
         this.khoa = khoa;
     }
+
+
+
+
 }

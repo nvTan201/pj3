@@ -10,18 +10,14 @@ import com.pj3.Project3.repository.IGvRepository;
 
 
 @Service
-public class GvService implements IGvService {
+public class GvService {
 
-	@Autowired
 	public IGvRepository gvrepository;
 
-
-	@Override
 	public giaoVien login(String email, String pass) {
 		return null;
 	}
 
-	@Override
 	public giaoVien addGv(giaoVien giaoVien) {
 		if (giaoVien != null) {
 			return gvrepository.save(giaoVien);
@@ -29,17 +25,14 @@ public class GvService implements IGvService {
 		return null;
 	}
 
-	@Override
 	public List<giaoVien> getAllGv() {
 		return gvrepository.findAll();
 	}
 
-	@Override
 	public giaoVien getById(long maGv) {
 		return gvrepository.getById(maGv);
 	}
 
-	@Override
 	public giaoVien updateGv(long maGv, giaoVien gv) {
 		giaoVien gvbyid = gvrepository.getById(maGv);
 		if (gvbyid != null) {
@@ -50,13 +43,12 @@ public class GvService implements IGvService {
 			gvbyid.setGioiTinh(gv.getGioiTinh());
 			gvbyid.setSdt(gv.getSdt());
 			gvbyid.setQuyen(gv.getQuyen());
-			
+
 			return gvrepository.save(gvbyid);
 		}
 		return null;
 	}
 
-	@Override
 	public boolean deleteGv(long maGv) {
 		if (maGv >= 1) {
 			giaoVien giaoVien = gvrepository.getById(maGv);

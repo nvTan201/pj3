@@ -19,11 +19,11 @@
             </div>
             <!-- /.card-header -->
             <!-- form start -->
-            <form th:action="@{hoc-sinh/add}" method="post">
+            <form th:action="@{../hoc-sinh/add}" method="post">
                 <div class="card-body">
                     <div class="form-group">
                         <label>Họ và Tên</label>
-                        <input type="email" class="form-control" name="name" placeholder="Họ Tên">
+                        <input type="text" class="form-control" name="name" placeholder="Họ Tên">
                     </div>
                     <div class="form-group">
                         <label>Ngày Sinh</label>
@@ -38,29 +38,27 @@
                     </div>
                     <div class="form-group">
                         <label>Sdt</label>
-                        <input type="number" class="form-control" name="sdt" placeholder="Số Điện Thoại">
+                        <input type="text" maxlength="10" class="form-control" name="sdt" placeholder="Số Điện Thoại">
                     </div>
                     <div class="form-group">
                         <label>Email</label>
                         <input type="email" class="form-control" name="email" placeholder="Enter email">
                     </div>
-                    <input type="hidden" name="pass" value="1">
-
                     <div class="form-group">
                         <label>lớp</label>
-                        <select class="form-control select2" style="width: 100%;">
+                        <select class="form-control select2" style="width: 100%;" name="lop">
                             <option disabled selected="selected">chọn lớp</option>
 
-                            <option th:each="rs , item:${rs}" th:value="${rs.maLop}" th:utext="${rs.tenKhoa}">
+                            <option th:each="lop , item:${lop}" th:value="${lop.getMa_lop()}" th:utext="${lop.getTen_lop()}+${lop.getTen_khoa()}">
 
                             </option>
                         </select>
                     </div>
-                    <div class="form-check">
-                        <but class="btn btn-primary">Thêm</but>
-                    </div>
                 </div>
                 <!-- /.card-body -->
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary">Thêm</button>
+                </div>
             </form>
         </div>
     </div>

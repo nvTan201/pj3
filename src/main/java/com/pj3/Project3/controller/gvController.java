@@ -2,7 +2,7 @@ package com.pj3.Project3.controller;
 
 
 import com.pj3.Project3.model.giaoVien;
-import com.pj3.Project3.service.IGvService;
+import com.pj3.Project3.service.GvService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,13 +16,13 @@ import java.util.List;
 public class gvController {
 
 	@Autowired
-	private IGvService igvservice;
+	private GvService gvservice;
 	
-	@GetMapping("/get-all")
+	@GetMapping("/index")
 	public String getAllGv (HttpServletRequest request) {
-		List<giaoVien> rs = igvservice.getAllGv();
+		List<giaoVien> rs = gvservice.getAllGv();
 		request.setAttribute("rs", rs);
-		return "home";
+		return "admin/giaoVien";
 	}
 
 }

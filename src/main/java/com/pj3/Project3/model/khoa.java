@@ -1,6 +1,7 @@
 package com.pj3.Project3.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -8,18 +9,20 @@ import java.util.List;
 public class khoa {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    @ManyToOne
-//    @JoinColumn(name = "idKhoa")
+    @Column(name = "idKhoa")
     private long idKhoa;
 
     @Column(name = "tenKhoa")
     private String tenKhoa;
 
-//    @OneToMany
-//    @JoinColumn(name = "khoa")
-//    List<lop> Lop;
+    @OneToMany(mappedBy = "khoa")
+    private List<lop> lop = new ArrayList<>();
 
     public khoa() {
+    }
+
+    public khoa(String tenKhoa) {
+        this.tenKhoa = tenKhoa;
     }
 
     public long getIdKhoa() {
@@ -38,8 +41,4 @@ public class khoa {
         this.tenKhoa = tenKhoa;
     }
 
-
-    public khoa(String tenKhoa) {
-        this.tenKhoa = tenKhoa;
-    }
 }

@@ -1,19 +1,25 @@
 package com.pj3.Project3.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "giaovien")
 public class giaoVien {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "maGv")
     private Long maGv;
 
-    @Column(name = "hoTenGv")
+    @Column(name = "hoTenGv", length = 50,
+    columnDefinition = "varchar(50)")
     private String hoTenGv;
 
     @Column(name = "ngaySinh")
-    private String ngaySinh;
+    @Temporal(TemporalType.DATE)
+    private Date ngaySinh;
 
     @Column(name = "gioiTinh")
     private int gioiTinh;
@@ -25,30 +31,36 @@ public class giaoVien {
     private String matKhauGv;
 
     @Column(name = "sdt")
-    private int sdt;
+    private String sdt;
+
+    @Column(name = "trangThai")
+    private int trangThai;
 
     @Column(name = "quyen")
     private int quyen;
 
-    public giaoVien() {
-    }
+    @OneToMany(mappedBy = "giaoVien")
+    private List<giangDay> giangDays = new ArrayList<>();
 
-    public giaoVien(String hoTenGv, String ngaySinh, int gioiTinh, String emailGv, String matKhauGv, int sdt, int quyen) {
-
+    public giaoVien(String hoTenGv, Date ngaySinh, int gioiTinh, String emailGv, String matKhauGv, String sdt, int trangThai, int quyen) {
         this.hoTenGv = hoTenGv;
         this.ngaySinh = ngaySinh;
         this.gioiTinh = gioiTinh;
         this.emailGv = emailGv;
         this.matKhauGv = matKhauGv;
         this.sdt = sdt;
+        this.trangThai = trangThai;
         this.quyen = quyen;
     }
 
-    public long getMaGv() {
+    public giaoVien() {
+    }
+
+    public Long getMaGv() {
         return maGv;
     }
 
-    public void setMaGv(long maGv) {
+    public void setMaGv(Long maGv) {
         this.maGv = maGv;
     }
 
@@ -60,11 +72,11 @@ public class giaoVien {
         this.hoTenGv = hoTenGv;
     }
 
-    public String getNgaySinh() {
+    public Date getNgaySinh() {
         return ngaySinh;
     }
 
-    public void setNgaySinh(String ngaySinh) {
+    public void setNgaySinh(Date ngaySinh) {
         this.ngaySinh = ngaySinh;
     }
 
@@ -92,12 +104,20 @@ public class giaoVien {
         this.matKhauGv = matKhauGv;
     }
 
-    public int getSdt() {
+    public String getSdt() {
         return sdt;
     }
 
-    public void setSdt(int sdt) {
+    public void setSdt(String sdt) {
         this.sdt = sdt;
+    }
+
+    public int getTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(int trangThai) {
+        this.trangThai = trangThai;
     }
 
     public int getQuyen() {

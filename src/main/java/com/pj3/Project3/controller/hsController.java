@@ -1,48 +1,51 @@
 package com.pj3.Project3.controller;
 
-import com.pj3.Project3.dto.findAllClass;
+import com.pj3.Project3.dto.LopAndKhoa;
 import com.pj3.Project3.model.hocSinh;
+import com.pj3.Project3.dto.hsLopAndKhoa;
 import com.pj3.Project3.model.lop;
-import com.pj3.Project3.service.IHsService;
-import com.pj3.Project3.service.ILopService;
+import com.pj3.Project3.service.HsService;
+import com.pj3.Project3.service.LopService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.List;
 
 @Controller
 @RequestMapping("/hoc-sinh")
 public class hsController {
     @Autowired
-    private IHsService ihsservice;
+    private HsService hsservice;
 
     @Autowired
-    private ILopService iLopService;
+    private LopService lopService;
 
-    @GetMapping("/get-all")
+    @GetMapping("/index")
     public String getAllHs(HttpServletRequest request){
-        List<hocSinh> rs = ihsservice.getAllHs();
+        List<hsLopAndKhoa> rs = hsservice.getAllHs();
         request.setAttribute("rs", rs);
-        return "hocSinh";
+        return "admin/hocSinh";
     }
 
     @GetMapping("/add")
-    @ResponseBody
-    public List<lop> add(HttpServletRequest request){
-        List<lop> rs = iLopService.getAllLop();
-        request.setAttribute("rs", rs);
-        return rs;
+    public String add(Model model){
+        List<LopAndKhoa> lop = lopService.displayLopById();
+        model.addAttribute("lop",lop);
+        return "admin/addHocSinh";
     }
 
     @PostMapping("/add")
-    public String addProcess(){
-
-        return "hocSinh";
+    public String addProcess(@RequestParam() String name, @RequestParam() @DateTimeFormat(pattern="yyyy-MM-dd") Date date,
+                             @RequestParam() int gioiTinh,@RequestParam() String sdt,
+                             @RequestParam() String email,@RequestParam() lop lop){
+        hocSinh hocSinh = new hocSinh(name, date, gioiTinh, email, "1", sdt, 1, lop);
+        hsservice.addHs(hocSinh);
+        return "redirect:/hoc-sinh/index";
     }
 
 }

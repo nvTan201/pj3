@@ -1,6 +1,8 @@
 package com.pj3.Project3.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "monhoc")
@@ -11,6 +13,16 @@ public class monHoc {
 
     @Column(name = "tenMon")
     private String tenMon;
+
+    @OneToMany(mappedBy = "monHoc")
+    private List<giangDay> giangDays = new ArrayList<>();
+
+    public monHoc() {
+    }
+
+    public monHoc(String tenMon) {
+        this.tenMon = tenMon;
+    }
 
     public long getMaMon() {
         return maMon;
@@ -26,12 +38,5 @@ public class monHoc {
 
     public void setTenMon(String tenMon) {
         this.tenMon = tenMon;
-    }
-
-    public monHoc(String tenMon) {
-        this.tenMon = tenMon;
-    }
-
-    public monHoc() {
     }
 }

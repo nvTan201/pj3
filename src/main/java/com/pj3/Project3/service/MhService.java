@@ -8,17 +8,15 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class MhService implements IMhService{
+public class MhService{
 
     @Autowired
     public IMhRepository iMhRepository;
 
-    @Override
     public List<monHoc> getAll() {
         return iMhRepository.findAll();
     }
 
-    @Override
     public monHoc addMh(monHoc monHoc) {
         if(monHoc != null){
             return iMhRepository.save(monHoc);
@@ -26,7 +24,6 @@ public class MhService implements IMhService{
         return null;
     }
 
-    @Override
     public monHoc editMh(long id, monHoc monHoc) {
         monHoc byId = iMhRepository.getById(id);
         if(byId !=null){
