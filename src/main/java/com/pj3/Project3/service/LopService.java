@@ -26,7 +26,9 @@ public class LopService{
     }
 
     public List<LopAndKhoa> displayLopById(){
-        List<LopAndKhoa> l = iLopRepository.displayLopById();
-        return l ;
+        List<LopAndKhoa> lop = iLopRepository.displayLopById();
+        return lop;
     }
+
+
 }

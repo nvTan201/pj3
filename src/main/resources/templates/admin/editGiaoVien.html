@@ -7,51 +7,49 @@
       layout:decorate="~{layout/layout}"
 >
 <head>
-<head>
     <meta charset="UTF-8">
-    <title>Thêm học sinh</title>
+    <title>Sửa Giáo Viên</title>
 </head>
 <body>
     <div class="content-wrapper" layout:fragment="content" >
         <div class="card card-primary">
             <div class="card-header">
-                <h3 class="card-title">Thêm Sinh Viên</h3>
+                <h3 class="card-title">Sửa Giáo Viên</h3>
             </div>
             <!-- /.card-header -->
             <!-- form start -->
-            <form th:action="@{/hoc-sinh/add}" method="post">
+            <form th:action="@{/giao-vien/edit/{id}(id=${giaoVien.maGv})}" th:method="PUT">
                 <div class="card-body">
                     <div class="form-group">
                         <label>Họ và Tên</label>
-                        <input type="text" class="form-control" name="name" placeholder="Họ Tên">
+                        <input type="text" class="form-control" name="name" th:value="${giaoVien.hoTenGv}" placeholder="Họ Tên">
                     </div>
                     <div class="form-group">
                         <label>Ngày Sinh</label>
-                        <input type="date" class="form-control" name="date" placeholder="Ngày Sinh">
+                        <input type="date" class="form-control" name="date" th:value="${giaoVien.ngaySinh}" placeholder="Ngày Sinh">
                     </div>
                     <div class="form-group">
                         <label>Giới Tính</label>
                         <br>
-                        <input type="radio" name="gioiTinh" value="1">Nam
+                        <input type="radio" name="gioiTinh" th:checked="${giaoVien.gioiTinh==1}" value="1">Nam
                         <br>
-                        <input type="radio" name="gioiTinh" value="0">nu
+                        <input type="radio" name="gioiTinh" th:checked="${giaoVien.gioiTinh==0}" value="0">nu
                     </div>
                     <div class="form-group">
                         <label>Sdt</label>
-                        <input type="text" maxlength="10" class="form-control" name="sdt" placeholder="Số Điện Thoại">
+                        <input type="text" maxlength="10" class="form-control" name="sdt" th:value="${giaoVien.sdt}" placeholder="Số Điện Thoại">
                     </div>
                     <div class="form-group">
                         <label>Email</label>
-                        <input type="email" class="form-control" name="email" placeholder="Enter email">
+                        <input type="email" class="form-control" name="email" th:value="${giaoVien.emailGv}" placeholder="Enter email">
                     </div>
                     <div class="form-group">
-                        <label>lớp</label>
-                        <select class="form-control select2" style="width: 100%;" name="lop">
-                            <option disabled selected="selected">chọn lớp</option>
+                        <label>Quyền</label>
+                        <select class="form-control select2" style="width: 100%;" name="quyen">
+                            <option disabled selected="selected">chọn Quyền</option>
 
-                            <option th:each="lop , item:${lop}" th:value="${lop.getMa_lop()}" th:utext="${lop.getTen_lop()}+${lop.getTen_khoa()}">
-
-                            </option>
+                            <option value="0" th:selected="${giaoVien.quyen==0}">Giáo Viên Giảng Dạy</option>
+                            <option value="1" th:selected="${giaoVien.quyen==1}">Giáo Vụ</option>
                         </select>
                     </div>
                 </div>

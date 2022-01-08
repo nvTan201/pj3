@@ -61,8 +61,17 @@
                         <th th:text = "${rs.getEmail_hs()}"></th>
                         <th th:text = "${rs.getSdt()}"></th>
                         <th th:text = "${rs.getTen_lop()}"></th>
-                        <th><a th:href="@{/}" align="center"><i class="fas fa-edit" style="color: #FFD700"></i></a></th>
-                        <th><a th:href="@{/}" align="center"><i class="fas fa-user-times" style="color: #FF0000"></i></a></th>
+                        <th>
+                            <a th:href="@{/hoc-sinh/edit/{id}(id=${rs.getMa_hs()})}" class="btn btn-small">
+                                <i class="fas fa-edit" style="color: #FFD700"></i>
+                            </a>
+                        </th>
+                        <th>
+                            <form th:action="@{/hoc-sinh/destroy/{id}(id=${rs.getMa_hs()})}"
+                                  th:method="DELETE">
+                                <button class="btn btn-small"><i class="fas fa-user-times" style="color: #FF0000"></i></button>
+                            </form>
+                        </th>
                     </tr>
                     </tbody>
                     <tfoot>

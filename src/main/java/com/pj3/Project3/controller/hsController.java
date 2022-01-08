@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/hoc-sinh")
@@ -33,7 +34,7 @@ public class hsController {
     }
 
     @GetMapping("/add")
-    public String add(Model model){
+    public String addHs(Model model){
         List<LopAndKhoa> lop = lopService.displayLopById();
         model.addAttribute("lop",lop);
         return "admin/addHocSinh";
@@ -48,4 +49,28 @@ public class hsController {
         return "redirect:/hoc-sinh/index";
     }
 
+    @GetMapping("/edit/{id}")
+    public String editForm(@PathVariable("id") Long id, Model model){
+        hocSinh hs = hsservice.findByIdHs(id);
+        List<LopAndKhoa> lop = lopService.displayLopById();
+        model.addAttribute("hs",hs);
+        model.addAttribute("lop",lop);
+        return "admin/editHocSinh";
+    }
+
+    @PutMapping("/edit/{id}")
+    public String edit(@RequestParam() String name, @RequestParam() @DateTimeFormat(pattern="yyyy-MM-dd") Date date,
+                       @RequestParam() int gioiTinh,@RequestParam() String sdt,
+                       @RequestParam() String email,@RequestParam() lop lop,
+                       @PathVariable("id") Long id){
+        hocSinh hocSinh = new hocSinh(name,date,gioiTinh,email,"1",sdt,1,lop);
+        hsservice.editHs(id,hocSinh);
+        return "redirect:/hoc-sinh/index";
+    }
+
+    @DeleteMapping("/destroy/{id}")
+    public String destroyHs(@PathVariable("id") Long id){
+        hsservice.destroy(id);
+        return "redirect:/hoc-sinh/index";
+    }
 }
