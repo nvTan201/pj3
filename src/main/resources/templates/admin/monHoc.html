@@ -32,7 +32,7 @@
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="nameMh">Tên Môn Học</label>
-                                    <input type="text" class="form-control" name="name" id="nameMh" placeholder="tên môn">
+                                    <input type="text" class="form-control" name="name" id="nameMh" required placeholder="tên môn">
                                 </div>
                             </div>
                             <!-- /.card-body -->
@@ -67,8 +67,8 @@
                                             <tr th:each="rs , item : ${rs}">
                                                 <th th:text = "${item.index+1}"></th>
                                                 <th th:text = "${rs.tenMon}"></th>
-                                                <th style="text-align: center;"><a th:href="@{/}" data-toggle="modal" data-target="#modal-sm"><i class="fas fa-edit" style="color: #FFD700"></i></a></th>
-                                                <th style="text-align: center;"><a th:href="@{/}"><i class="fas fa-user-times" style="color: #FF0000"></i></a></th>
+                                                <th style="text-align: center;"><a th:data-url="@{/mon-hoc/edit/{id}(id=${rs.maMon})}" data-toggle="modal" data-target="#modal-sm" class="edit"><i class="fas fa-edit" style="color: #FFD700"></i></a></th>
+                                                <th style="text-align: center;"><a th:data-url="@{/mon-hoc/destroy/{id}(id=${rs.maMon})}" id="delete"><i class="fas fa-user-times" style="color: #FF0000"></i></a></th>
 
                                             </tr>
                                             </tbody>
@@ -90,6 +90,42 @@
                 </section>
             </div>
         </section>
+        <script type="text/javascript">
+            $(".edit").click(function(e){
+                e.preventDefault();
+                var url = "http://localhost:8080" + $(this).attr('data-url');
+
+                <!-- alert(url);-->
+
+                $.ajax({
+                    type:"GET",
+                    url: url,
+                    success: function(data){
+                        console.log(data);
+                        $("#nameMhe").val(data.tenMon);
+                        $("#formE").attr('action', url);
+                    }
+                });
+            });
+        </script>
+<!--        <script>-->
+<!--            $(".edit").click(function(e){-->
+<!--                e.preventDefault();-->
+<!--                var url = "http://localhost:8080" + $(this).attr('data-url');-->
+
+<!--                &lt;!&ndash; alert(url);&ndash;&gt;-->
+
+<!--                $.ajax({-->
+<!--                    type:"GET",-->
+<!--                    url: url,-->
+<!--                    success: function(data){-->
+<!--                        console.log(data);-->
+<!--                        $("#nameMhe").val(data.tenMon);-->
+<!--                        $("#formE").attr('data-url', url);-->
+<!--                    }-->
+<!--                });-->
+<!--            });-->
+<!--        </script>-->
     </div>
     <span layout:fragment="modal">
         <div class="modal fade" id="modal-sm">
@@ -102,18 +138,20 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form th:action="@{/mh/add}" method="post">
-                            <input type="hidden" name="id">
+                        <form id="formE" method="post">
+                            <input type="hidden"
+                                   th:name="${_csrf.parameterName}"
+                                   th:value="${_csrf.token}" />
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="nameMh">Tên Môn Học</label>
-                                    <input type="text" class="form-control" name="name" placeholder="tên môn (VD : lập trình)">
+                                    <label for="nameMhe">Tên Môn Học</label>
+                                    <input type="text" class="form-control" id="nameMhe" name="name" required placeholder="tên môn (VD : lập trình)">
                                 </div>
                             </div>
                             <!-- /.card-body -->
                             <div class="modal-footer justify-content-between">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Lưu</button>
+                                <button type="submit" class="btn btn-primary" id="save">Lưu</button>
                             </div>
                         </form>
                     </div>
@@ -122,6 +160,46 @@
             </div>
             <!-- /.modal-dialog -->
         </div>
+<!--        <script>-->
+<!--            $("#save").click(function(e){-->
+<!--                var Toast = Swal.mixin({-->
+<!--                    toast: true,-->
+<!--                    position: 'top-end',-->
+<!--                    showConfirmButton: false,-->
+<!--                    timer: 3000-->
+<!--                });-->
+<!--                e.preventDefault();-->
+
+<!--                var url = $(formE).attr('data-url');-->
+<!--                var name = $("#nameMhe").val();-->
+<!--                var token = $("input[name='_token']" ).val();-->
+<!--                alert(token);-->
+<!--                if (name == "") {-->
+<!--                    alert("điền đầy đủ thông tin");-->
+<!--                }else{-->
+<!--                    $.ajax({-->
+<!--                        type:"PUT",-->
+<!--                        url: url,-->
+<!--                        data: {-->
+<!--                            _token:token-->
+<!--                            name:name-->
+<!--                        },-->
+<!--                        success: function(data){-->
+<!--                            Toast.fire({-->
+<!--                              icon: 'success',-->
+<!--                              title: 'Thành Công'-->
+<!--                            })-->
+
+<!--                            $('#formE').modal('hide');-->
+
+<!--                            setTimeout(function(){-->
+<!--                                window.location.href= "http://localhost:8080/mon-hoc/index";-->
+<!--                            },800)-->
+<!--                        }-->
+<!--                    });-->
+<!--                }-->
+<!--            });-->
+<!--        </script>-->
     </span>
 
 

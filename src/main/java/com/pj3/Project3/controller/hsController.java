@@ -35,7 +35,7 @@ public class hsController {
 
     @GetMapping("/add")
     public String addHs(Model model){
-        List<LopAndKhoa> lop = lopService.displayLopById();
+        List<LopAndKhoa> lop = lopService.displayLop();
         model.addAttribute("lop",lop);
         return "admin/addHocSinh";
     }
@@ -52,7 +52,7 @@ public class hsController {
     @GetMapping("/edit/{id}")
     public String editForm(@PathVariable("id") Long id, Model model){
         hocSinh hs = hsservice.findByIdHs(id);
-        List<LopAndKhoa> lop = lopService.displayLopById();
+        List<LopAndKhoa> lop = lopService.displayLop();
         model.addAttribute("hs",hs);
         model.addAttribute("lop",lop);
         return "admin/editHocSinh";

@@ -6,7 +6,9 @@ import com.pj3.Project3.model.hocSinh;
 import com.pj3.Project3.model.lop;
 import com.pj3.Project3.service.GvService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -21,11 +23,15 @@ public class gvController {
 
 	@Autowired
 	private GvService gvservice;
+
+	@Autowired
+	BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 	@GetMapping("/index")
 	public String getAllGv (HttpServletRequest request) {
 		List<giaoVien> rs = gvservice.getAllGv();
 		request.setAttribute("rs", rs);
+
 		return "admin/giaoVien";
 	}
 
@@ -38,7 +44,9 @@ public class gvController {
 	public String addGv(@RequestParam() String name, @RequestParam() @DateTimeFormat(pattern="yyyy-MM-dd") Date date,
 						@RequestParam() int gioiTinh,@RequestParam() String sdt,
 						@RequestParam() String email,@RequestParam() int quyen){
-		giaoVien giaoVien = new giaoVien(name, date, gioiTinh, email, "1", sdt, 1, quyen);
+		String pass = bCryptPasswordEncoder.encode("123");
+
+		giaoVien giaoVien = new giaoVien(name, date, gioiTinh, email, pass, sdt, 1, quyen);
 		gvservice.addGv(giaoVien);
 		return "redirect:/giao-vien/index";
 	}

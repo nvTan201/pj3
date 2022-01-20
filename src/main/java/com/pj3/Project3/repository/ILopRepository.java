@@ -11,6 +11,9 @@ import java.util.List;
 @Repository
 public interface ILopRepository extends JpaRepository<lop, Long> {
 
-    @Query(value = "SELECT l.ma_lop,l.ten_lop,k.ten_khoa FROM `lop` l INNER JOIN khoa k ON l.id_khoa = k.id_khoa;",nativeQuery = true)
-    List<LopAndKhoa> displayLopById();
+    @Query(value = "SELECT l.ma_lop,l.ten_lop,k.ten_khoa FROM `lop` l INNER JOIN khoa k ON l.id_khoa = k.id_khoa",nativeQuery = true)
+    List<LopAndKhoa> displayLop();
+
+    @Query(value = "SELECT l.ma_lop,l.ten_lop,k.ten_khoa FROM `lop` l INNER JOIN khoa k ON l.id_khoa = k.id_khoa WHERE l.ma_lop = ?",nativeQuery = true)
+    List<LopAndKhoa> displayLopById(Long id);
 }

@@ -6,6 +6,8 @@ import java.util.Optional;
 import com.pj3.Project3.model.giaoVien;
 import com.pj3.Project3.model.hocSinh;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.pj3.Project3.repository.IGvRepository;
@@ -53,6 +55,16 @@ public class GvService {
 		if(gvById != null && gvById.getTrangThai() == 1){
 			gvById.setTrangThai(0);
 			return iGvRepository.save(gvById);
+		}
+		return null;
+	}
+
+	public giaoVien loginGv(String email){
+		Optional<giaoVien> rs = iGvRepository.findByEmailGv(email);
+		giaoVien giaoVien = null;
+		if (rs != null){
+			giaoVien = rs.get();
+			return giaoVien;
 		}
 		return null;
 	}

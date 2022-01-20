@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MhService{
@@ -24,7 +25,17 @@ public class MhService{
         return null;
     }
 
-    public monHoc editMh(long id, monHoc monHoc) {
+    public monHoc findByIdMh(Long id){
+        Optional<monHoc> rs = iMhRepository.findById(id);
+        monHoc monHoc = null;
+        if (rs != null){
+            monHoc = rs.get();
+            return monHoc;
+        }
+        return null;
+    }
+
+    public monHoc editMh(Long id, monHoc monHoc) {
         monHoc byId = iMhRepository.getById(id);
         if(byId !=null){
             byId.setTenMon(monHoc.getTenMon());
@@ -33,4 +44,14 @@ public class MhService{
         return null;
     }
 
+    public boolean destroyMh(Long id){
+        if (id >= 1){
+            monHoc monHoc = iMhRepository.getById(id);
+            if(monHoc != null){
+                iMhRepository.delete(monHoc);
+                return true;
+            }
+        }
+        return false;
+    }
 }

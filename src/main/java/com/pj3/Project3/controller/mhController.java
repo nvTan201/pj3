@@ -3,6 +3,8 @@ package com.pj3.Project3.controller;
 import com.pj3.Project3.model.monHoc;
 import com.pj3.Project3.service.MhService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -11,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
-@RequestMapping("/mh")
+@RequestMapping("/mon-hoc")
 public class mhController {
     @Autowired
     public MhService mhService;
@@ -27,11 +29,23 @@ public class mhController {
         monHoc rs = new monHoc(name);
         mhService.addMh(rs);
 //        model.addAttribute("success", "true");
-        return "redirect:/mh/index";
+        return "redirect:/mon-hoc/index";
     }
-    @PutMapping("/edit")
-    public String edit(@RequestParam() long id,@RequestParam() String name){
+    @GetMapping("/edit/{id}")
+    public ResponseEntity<monHoc> edit(@PathVariable("id") Long id){
+        monHoc rs = mhService.findByIdMh(id);
+        return new ResponseEntity<monHoc>(rs, HttpStatus.OK);
+    }
 
+    @PutMapping("/edit/{id}")
+    public String edit(@PathVariable("id") Long id, @RequestParam() String name){
+        monHoc monHoc = new monHoc(name);
+        mhService.editMh(id,monHoc);
+        return "redirect:/mon-hon/index";
+    }
+
+    @DeleteMapping("/destroy/{id}")
+    public String destroyMh(){
         return null;
     }
 }

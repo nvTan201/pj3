@@ -76,7 +76,7 @@
                                             <th th:text = "${item.index+1}"></th>
                                             <th th:text = "${rs.getTen_lop()}"></th>
                                             <th th:text = "${rs.getTen_khoa()}"></th>
-                                            <th style="text-align: center;"><a th:href="@{/}"><i class="fas fa-edit" style="color: #FFD700"></i></a></th>
+                                            <th style="text-align: center;"><a th:data-url="@{/lop/edit/{id}(id=${rs.getMa_lop()})}" data-toggle="modal" data-target="#modal-sm" class="edit"><i class="fas fa-edit" style="color: #FFD700"></i></a></th>
                                             <th style="text-align: center;"><a th:href="@{/}"><i class="fas fa-user-times" style="color: #FF0000"></i></a></th>
                                         </tr>
                                         </tbody>
@@ -99,6 +99,105 @@
             </section>
         </div>
     </section>
+    <script>
+        $(".edit").click(function(e){
+                e.preventDefault();
+                var url = "http://localhost:8080" + $(this).attr('data-url');
+
+                <!-- alert(url);-->
+
+                $.ajax({
+                    type:"GET",
+                    url: url,
+                    success: function(data){
+                        console.log(data);
+<!--                        console.log(data.khoa.idKhoa);-->
+                        $("#tenlope").val(data.tenLop);
+                        $("#khoae").val(data.khoa.idKhoa).attr('selected','selected');
+                        $("#formE").attr('action', url);
+                    }
+                });
+            });
+    </script>
 </div>
+
+<span layout:fragment="modal">
+        <div class="modal fade" id="modal-sm">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Sửa Lớp Học</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="formE" th:method="PUT">
+                            <input type="hidden"
+                                   th:name="${_csrf.parameterName}"
+                                   th:value="${_csrf.token}" />
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="tenlope">Tên Lớp</label>
+                                    <input type="text" class="form-control" id="tenlope" name="name" placeholder="tên lớp (VD : bkd08)">
+                                </div>
+                                <div class="form-group">
+                                    <label>Khóa</label>
+                                    <select class="form-control select2" style="width: 100%;" name="khoa" id="khoae">
+                                        <option disabled selected="selected">chọn khóa</option>
+                                        <option th:each="k , item:${k}" th:value="${k.idKhoa}" th:utext="${k.tenKhoa}">
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- /.card-body -->
+                            <div class="modal-footer justify-content-between">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary" id="save">Lưu</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+<!--        <script>-->
+<!--            $("#formE").click(function(e){-->
+<!--                e.preventDefault();-->
+<!--                var Toast = Swal.mixin({-->
+<!--                    toast: true,-->
+<!--                    position: 'top-end',-->
+<!--                    showConfirmButton: false,-->
+<!--                    timer: 3000-->
+<!--                });-->
+
+<!--                var url = $(this).attr('data-url');-->
+<!--                var name = $("#tenlope").val();-->
+<!--                var khoa = $("#khoae").val();-->
+<!--alert(url);-->
+<!--                $.ajax({-->
+<!--                    type:"PUT",-->
+<!--                    url: url,-->
+<!--                    data:{-->
+<!--                        name:name,-->
+<!--                        khoa:khoa-->
+<!--                    }-->
+<!--                    success: function(data){-->
+<!--                        Toast.fire({-->
+<!--                              icon: 'success',-->
+<!--                              title: 'Thành Công'-->
+<!--                            })-->
+
+<!--                            $('#formE').modal('hide');-->
+
+<!--                            setTimeout(function(){-->
+<!--                                window.location.href= "http://localhost:8080/lop/index";-->
+<!--                            },800)-->
+<!--                    }-->
+<!--                });-->
+<!--            });-->
+<!--        </script>-->
+    </span>
 </body>
 </html>

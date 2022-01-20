@@ -10,6 +10,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>AdminLTE 3 | Dashboard 2</title>
 
+    <!--  ajax  -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
@@ -17,10 +19,12 @@
     <!-- Theme style -->
     <link rel="stylesheet" th:href="@{/dist/css/adminlte.min.css}">
 
-<!--    &lt;!&ndash; SweetAlert2 &ndash;&gt;-->
-<!--    <link rel="stylesheet" th:href="@{/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css}">-->
-<!--    &lt;!&ndash; Toastr &ndash;&gt;-->
-<!--    <link rel="stylesheet" th:href="@{/plugins/toastr/toastr.min.css}">-->
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" th:href="@{/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css}">
+    <!-- Toastr -->
+    <link rel="stylesheet" th:href="@{/plugins/toastr/toastr.min.css}">
+    <!-- Theme style -->
+    <link rel="stylesheet" th:href="@{/dist/css/adminlte.min.css}">
 
     <!-- DataTables -->
     <link rel="stylesheet" th:href="@{/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css}">
@@ -49,7 +53,13 @@
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
-
+        <li class="nav-item">
+            <div class="info">
+                <form th:action="@{/logout}" th:method="post">
+                    <button class="fas fa-sign-out-alt"></button>
+                </form>
+            </div>
+        </li>
     </ul>
 </nav>
 
@@ -64,9 +74,7 @@
     <div class="sidebar">
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-            <div class="info">
-                <a href="#" class="d-block">admin</a>
-            </div>
+
         </div>
 
         <!-- SidebarSearch Form -->
@@ -96,10 +104,10 @@
                     </a>
                 </li>
                 <li class="nav-item menu-open">
-                <a href="#" class="nav-link">
+                <a th:href="@{/giang-day/index}" class="nav-link">
                     <i class="nav-icon fas fa-th"></i>
                     <p>
-                        Quản Lý Năm Học
+                        Quản Lý Giảng Dạy
                     </p>
                 </a>
                 </li>
@@ -112,7 +120,7 @@
                     </a>
                 </li>
                 <li class="nav-item menu-open">
-                    <a th:href="@{/mh/index}" class="nav-link">
+                    <a th:href="@{/mon-hoc/index}" class="nav-link">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
                             Quản Lý Môn Học
@@ -188,10 +196,9 @@
 <!-- Bootstrap 4 -->
 <script th:src="@{/plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
 
-<!--&lt;!&ndash; SweetAlert2 &ndash;&gt;-->
-<!--<script th:src="@{/plugins/sweetalert2/sweetalert2.min.js}"></script>-->
-<!--&lt;!&ndash; Toastr &ndash;&gt;-->
-<!--<script th:src="@{/plugins/toastr/toastr.min.js}"></script>-->
+<script th:src="@{/plugins/sweetalert2/sweetalert2.min.js}"></script>
+<!-- Toastr -->
+<script th:src="@{/plugins/toastr/toastr.min.js}"></script>
 
 <!-- DataTables  & Plugins -->
 <script th:src="@{/plugins/datatables/jquery.dataTables.min.js}"></script>
