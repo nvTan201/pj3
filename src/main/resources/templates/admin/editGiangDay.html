@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}"
+>
+<head>
+    <head>
+        <meta charset="UTF-8">
+        <title>Sửa Công Việc Giáo Viên</title>
+    </head>
+<body>
+<div class="content-wrapper" layout:fragment="content" >
+    <div class="card card-primary">
+        <div class="card-header">
+            <h3 class="card-title">Sửa</h3>
+        </div>
+        <!-- /.card-header -->
+        <!-- form start -->
+        <form th:action="@{/giang-day/edit/{id}(id=${rs.getMa_gd()})}" th:method="PUT">
+            <div class="card-body">
+                <div class="form-group">
+                    <label>Năm Học</label>
+                    <input type="number" class="form-control" min="1990" id="nh" name="namhoc" th:value="${rs.getNam_hoc()}" placeholder="Năm Họ">
+                </div>
+                <script>
+                    var today = new Date().getFullYear();
+                    document.getElementById("nh").setAttribute("max", today);
+                </script>
+                <div class="form-group">
+                    <label>Học Kỳ</label>
+                    <input type="number" max="2" min="1" class="form-control" name="hocky" th:value="${rs.getHoc_ky()}" placeholder="học kỳ">
+                </div>
+                <div class="form-group">
+                    <label>Giáo Viên</label>
+                    <br>
+                    <select name="giaovien">
+                        <option disabled selected>chọn giáo viên</option>
+                        <option th:each="gv , item:${gv}" th:value="${gv.maGv}" th:selected="${rs.getMa_gv() == gv.maGv}" th:utext="${gv.hoTenGv}">
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Môn</label>
+                    <br>
+                    <select name="mon">
+                        <option disabled selected>chọn môn</option>
+                        <option th:each="mh , item:${mh}" th:value="${mh.maMon}" th:selected="${rs.getMa_mon() == mh.maMon}" th:utext="${mh.tenMon}">
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Lớp</label>
+                    <br>
+                    <select name="lop">
+                        <option disabled selected>chọn môn</option>
+                        <option th:each="lop , item:${lop}" th:value="${lop.getMa_lop()}" th:selected="${lop.getMa_lop() == rs.getMa_lop()}" th:utext="${lop.getTen_lop()}+${lop.getTen_khoa()}">
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Chủ Nghiệm</label>
+                    <br>
+                    <input type="radio" name="chuNghiem" value="1" th:checked="${rs.getChu_nghiem() == 1}"> giáo viên chủ nghiệm
+                    <br>
+                    <input type="radio" name="chuNghiem" value="0" th:checked="${rs.getChu_nghiem() == 0}"> giáo viên bộ môn
+                    <br>
+                </div>
+                <div class="form-group">
+                    <label>Trạng Thái</label>
+                    <br>
+                    <input type="radio" name="trangThai" value="1" th:checked="${rs.getTrang_thai() == 1}"> Đã Hoàn Thành
+                    <br>
+                    <input type="radio" name="trangThai" value="0" th:checked="${rs.getTrang_thai() == 0}"> Vẫn Còn Học
+                    <br>
+                </div>
+            </div>
+            <!-- /.card-body -->
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary">Sửa</button>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

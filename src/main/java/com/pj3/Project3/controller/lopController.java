@@ -1,6 +1,7 @@
 package com.pj3.Project3.controller;
 
 import com.pj3.Project3.dto.LopAndKhoa;
+import com.pj3.Project3.dto.giangDayGetAll;
 import com.pj3.Project3.model.khoa;
 import com.pj3.Project3.model.lop;
 import com.pj3.Project3.service.KhoaService;
@@ -55,5 +56,11 @@ public class lopController {
         return "redirect:/lop/index";
     }
 
+//    @GetMapping("/view/{id}")
+//    public String views(@PathVariable() Long id, Model model){
+//        List<giangDayGetAll> rs = lopService.viewsDetail(id);
+//        model.addAttribute("rs", rs);
+//        return "lopDetail";
+//    }
 
 }

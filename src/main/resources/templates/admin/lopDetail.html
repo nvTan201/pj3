@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Chi Tiết Lớp</title>
+</head>
+<body>
+<div class="content-wrapper" layout:fragment="content" >
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                </div>
+                <div class="col-sm-6">
+                    <ol class="float-sm-right">
+                        <ul class="">
+                            <br>
+                            <a th:href="@{/giao-vien/add}" class="btn bg-gradient-success btn-sm">
+                                thêm
+                                <i class="fas fa-plus"></i>
+                            </a>
+                        </ul>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="content">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title" th:utext="Lớp + "></h2>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                <table id="example1" class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                        <th>Stt</th>
+                        <th>Lớp</th>
+                        <th>Môn</th>
+                        <th>Năm Học</th>
+                        <th>Học Kỳ</th>
+                        <th>Trạng Thái</th>
+                        <th>Giáo Viên</th>
+                        <th style="color: #FFD700">Sửa</th>
+                        <th style="color: #FF0000">Xóa</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="rs , item : ${rs}">
+                        <th th:text = "${item.index+1}"></th>
+                        <th th:text = "${rs.hoTenGv}"></th>
+                        <th th:text = "${rs.ngaySinh}"></th>
+                        <th th:text = "${rs.gioiTinh==1?'Nam':'Nữ'}"></th>
+                        <th th:text = "${rs.emailGv}"></th>
+                        <th th:text = "${rs.sdt}"></th>
+                        <th th:text = "${rs.quyen==0?'Giáo Viên':'Giáo Vụ'}"></th>
+                        <th><a th:href="@{/giao-vien/edit/{id}(id=${rs.maGv})}" class="btn btn-small"><i class="fas fa-edit" style="color: #FFD700"></i></a></th>
+                        <th>
+                            <form th:action="@{/giao-vien/destroy/{id}(id=${rs.maGv})}"
+                                  th:method="DELETE">
+                                <button class="btn btn-small"><i class="fas fa-user-times" style="color: #FF0000"></i></button>
+                            </form>
+                        </th>
+                    </tr>
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <th>Stt</th>
+                        <th>Họ Tên</th>
+                        <th>Ngày Sinh</th>
+                        <th>Giới Tính</th>
+                        <th>Email</th>
+                        <th>Sdt</th>
+                        <th>Quyền</th>
+                        <th style="color: #FFD700">Sửa</th>
+                        <th style="color: #FF0000">Xóa</th>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+            <!-- /.card-body -->
+        </div>
+    </section>
+</div>
+</body>
+</html>

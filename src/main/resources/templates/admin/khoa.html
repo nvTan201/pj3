@@ -34,9 +34,64 @@
                                     <label for="namekh">Tên Khóa Học</label>
                                     <input type="text" class="form-control" name="name" id="nameKh" placeholder="tên khóa (VD : k11)">
                                 </div>
+                                <div class="form-group">
+                                    <label for="namNhapHoc">Năm Nhập Học</label>
+                                    <input type="date" class="form-control" name="date"  id="namNhapHoc" placeholder="năm nhập học">
+                                </div>
+                                <div class="form-group">
+                                    <label for="hoc">Học Năm</label>
+                                    <select class="form-control" name="hoc" id="hoc">
+                                        <option disabled selected>
+                                            Chọn Năm Học
+                                        </option>
+                                        <option value="1">
+                                            Năm 1
+                                        </option>
+                                        <option value="2">
+                                            Năm 2
+                                        </option>
+                                        <option value="3">
+                                            Năm 3
+                                        </option>
+                                        <option value="4">
+                                            Đẫ Ra Trường
+                                        </option>
+                                    </select>
+                                </div>
                             </div>
                             <!-- /.card-body -->
+                            <script>
+                                var today = new Date();
+                                var dd = today.getDate();
+                                var mm = today.getMonth() + 1; //January is 0!
+                                var yyyy = today.getFullYear();
 
+                                if (dd < 10) {
+                                   dd = '0' + dd;
+                                }
+
+                                if (mm < 10) {
+                                   mm = '0' + mm;
+                                }
+
+                                today = yyyy + '-' + mm + '-' + dd;
+                                document.getElementById("namNhapHoc").setAttribute("max", today);
+                                document.getElementById("namNhapHoce").setAttribute("max", today);
+                            </script>
+                            <script>
+                                $("#namNhapHoc").change(function(e){
+                                    var date = new Date(document.getElementById("namNhapHoc").value).getFullYear();
+                                    var hoc = new Date().getFullYear() - date;
+
+                                    if(hoc == 0){
+                                        $("#hoc").val("1").attr('selected','selected');
+                                    }else if(hoc <= 3){
+                                        $("#hoc").val(hoc).attr('selected','selected');
+                                    }else {
+                                        $("#hoc").val("4").attr('selected','selected');
+                                    }
+                                });
+                            </script>
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-primary">Thêm</button>
                             </div>
@@ -59,6 +114,8 @@
                                             <tr>
                                                 <th>Stt</th>
                                                 <th>Tên Khóa</th>
+                                                <th>Năm Nhập Học</th>
+                                                <th>Đang Học Năm</th>
                                                 <th style="color: #FFD700;text-align: center;">Sửa</th>
                                                 <th style="color: #FF0000;text-align: center;">Xóa</th>
                                             </tr>
@@ -67,6 +124,8 @@
                                             <tr th:each="rs , item : ${rs}">
                                                 <th th:text = "${item.index+1}"></th>
                                                 <th th:text = "${rs.tenKhoa}"></th>
+                                                <th th:text = "${rs.namNhapHoc}"></th>
+                                                <th th:text = "${rs.hoc <= 3?'năm '+rs.hoc:'đã ra trường'}"></th>
                                                 <th style="text-align: center;"><a th:data-url="@{/khoa/edit/{id}(id=${rs.idKhoa})}" data-toggle="modal" data-target="#modal-sm" class="edit"><i class="fas fa-edit" style="color: #FFD700"></i></a></th>
                                                 <th style="text-align: center;"><a th:data-url="@{/}"><i class="fas fa-user-times" style="color: #FF0000"></i></a></th>
 
@@ -76,6 +135,8 @@
                                             <tr>
                                                 <th>Stt</th>
                                                 <th>Tên Khóa</th>
+                                                <th>Năm Nhập Học</th>
+                                                <th>Đang Học Năm</th>
                                                 <th style="color: #FFD700;text-align: center;">Sửa</th>
                                                 <th style="color: #FF0000;text-align: center;">Xóa</th>
                                             </tr>
@@ -103,6 +164,8 @@
                     success: function(data){
                         console.log(data);
                         $("#nameKhoae").val(data.tenKhoa);
+                        $("#namNhapHoce").val(data.namNhapHoc);
+                        $("#hoce").val(data.hoc).attr('selected','selected');
                         $("#formE").attr('action', url);
                     }
                 });
@@ -130,6 +193,30 @@
                                     <label for="nameKhoae">Tên khóa</label>
                                     <input type="text" class="form-control" id="nameKhoae" name="name" placeholder="tên khoa (VD : k11)">
                                 </div>
+                                <div class="form-group">
+                                    <label for="namNhapHoce">Năm Nhập Học</label>
+                                    <input type="date" class="form-control" name="date"  id="namNhapHoce" placeholder="năm nhập học">
+                                </div>
+                                <div class="form-group">
+                                    <label for="hoce">Học Năm</label>
+                                    <select class="form-control" name="hoc" id="hoce">
+                                        <option disabled selected>
+                                            Chọn Năm Học
+                                        </option>
+                                        <option value="1">
+                                            Năm 1
+                                        </option>
+                                        <option value="2">
+                                            Năm 2
+                                        </option>
+                                        <option value="3">
+                                            Năm 3
+                                        </option>
+                                        <option value="4">
+                                            Đẫ Ra Trường
+                                        </option>
+                                    </select>
+                                </div>
                             </div>
                             <!-- /.card-body -->
                             <div class="modal-footer justify-content-between">
@@ -143,6 +230,20 @@
             </div>
             <!-- /.modal-dialog -->
         </div>
+        <script>
+            $("#namNhapHoce").change(function(e){
+                var date = new Date(document.getElementById("namNhapHoce").value).getFullYear();
+                var hoc = new Date().getFullYear() - date;
+
+                if(hoc == 0){
+                    $("#hoce").val("1").attr('selected','selected');
+                }else if(hoc <= 3){
+                    $("#hoce").val(hoc).attr('selected','selected');
+                }else {
+                    $("#hoce").val("4").attr('selected','selected');
+                }
+            });
+        </script>
 <!--        <script>-->
 <!--            $("#save").click(function(e){-->
 <!--                var Toast = Swal.mixin({-->

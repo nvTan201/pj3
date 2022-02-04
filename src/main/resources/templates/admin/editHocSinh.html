@@ -48,7 +48,7 @@
                         <select class="form-control select2" style="width: 100%;" name="lop">
                             <option disabled selected="selected">chọn lớp</option>
 
-                            <option th:each="lop , item:${lop}" th:value="${lop.getMa_lop()}" th:utext="${lop.getTen_lop()}+${lop.getTen_khoa()}" th:selected="${lop.getMa_lop() == hs.lop?'selected':''}"></option>
+                            <option th:each="lop , item:${lop}" th:value="${lop.getMa_lop()}" th:utext="${lop.getTen_lop()}+${lop.getTen_khoa()}" th:selected="${lop.getMa_lop() == hs.lop}"></option>
                         </select>
                     </div>
                 </div>

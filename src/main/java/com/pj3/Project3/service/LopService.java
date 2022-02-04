@@ -1,8 +1,8 @@
 package com.pj3.Project3.service;
 
 import com.pj3.Project3.dto.LopAndKhoa;
-import com.pj3.Project3.model.giaoVien;
 import com.pj3.Project3.model.lop;
+import com.pj3.Project3.repository.IGdRepository;
 import com.pj3.Project3.repository.ILopRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +15,9 @@ public class LopService{
 
     @Autowired
     public ILopRepository iLopRepository;
+
+    @Autowired
+    public IGdRepository iGdRepository;
 
     public List<lop> getAllLop() {
         return iLopRepository.findAll();
@@ -51,6 +54,5 @@ public class LopService{
         }
         return null;
     }
-
 
 }

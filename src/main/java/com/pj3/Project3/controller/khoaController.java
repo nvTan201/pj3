@@ -3,12 +3,15 @@ package com.pj3.Project3.controller;
 import com.pj3.Project3.model.khoa;
 import com.pj3.Project3.service.KhoaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -26,8 +29,8 @@ public class khoaController {
     }
 
     @PostMapping("/add")
-    public String add(Model model, @RequestParam() String name){
-        khoa rs = new khoa(name);
+    public String add(Model model, @RequestParam() String name, @DateTimeFormat(pattern="yyyy-MM-dd") Date date, @RequestParam int hoc){
+        khoa rs = new khoa(name,date,hoc);
         khoaService.addKhoa(rs);
         return "redirect:/khoa/index";
     }
@@ -40,8 +43,8 @@ public class khoaController {
 
     @PutMapping("/edit/{id}")
 
-    public String editKhoa(@PathVariable() Long id , @RequestParam() String name){
-        khoa khoa = new khoa(name);
+    public String editKhoa(@PathVariable() Long id , @RequestParam() String name, @DateTimeFormat(pattern="yyyy-MM-dd") Date date, @RequestParam int hoc){
+        khoa khoa = new khoa(name, date, hoc);
         khoaService.editKhoa(id,khoa);
         return "redirect:/khoa/index";
     }
