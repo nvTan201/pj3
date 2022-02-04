@@ -1,16 +1,13 @@
-package com.pj3.Project3.service;
+package com.pj3.Project3.service.admin;
 
 import java.util.List;
 import java.util.Optional;
 
 import com.pj3.Project3.model.giaoVien;
-import com.pj3.Project3.model.hocSinh;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.pj3.Project3.repository.IGvRepository;
+import com.pj3.Project3.repository.admin.IGvRepository;
 
 
 @Service

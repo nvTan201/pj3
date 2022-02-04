@@ -1,7 +1,7 @@
-package com.pj3.Project3.controller;
+package com.pj3.Project3.controller.admin;
 
 import com.pj3.Project3.model.monHoc;
-import com.pj3.Project3.service.MhService;
+import com.pj3.Project3.service.admin.MhService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,4 +1,4 @@
-package com.pj3.Project3.controller;
+package com.pj3.Project3.controller.admin;
 
 import com.pj3.Project3.dto.LopAndKhoa;
 import com.pj3.Project3.dto.giangDayGetAll;
@@ -6,10 +6,10 @@ import com.pj3.Project3.model.giangDay;
 import com.pj3.Project3.model.giaoVien;
 import com.pj3.Project3.model.lop;
 import com.pj3.Project3.model.monHoc;
-import com.pj3.Project3.service.GdService;
-import com.pj3.Project3.service.GvService;
-import com.pj3.Project3.service.LopService;
-import com.pj3.Project3.service.MhService;
+import com.pj3.Project3.service.admin.GdService;
+import com.pj3.Project3.service.admin.GvService;
+import com.pj3.Project3.service.admin.LopService;
+import com.pj3.Project3.service.admin.MhService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

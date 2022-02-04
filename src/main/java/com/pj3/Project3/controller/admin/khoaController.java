@@ -1,7 +1,7 @@
-package com.pj3.Project3.controller;
+package com.pj3.Project3.controller.admin;
 
 import com.pj3.Project3.model.khoa;
-import com.pj3.Project3.service.KhoaService;
+import com.pj3.Project3.service.admin.KhoaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
@@ -10,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 

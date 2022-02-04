@@ -1,12 +1,9 @@
-package com.pj3.Project3.controller;
+package com.pj3.Project3.controller.admin;
 
 
 import com.pj3.Project3.model.giaoVien;
-import com.pj3.Project3.model.hocSinh;
-import com.pj3.Project3.model.lop;
-import com.pj3.Project3.service.GvService;
+import com.pj3.Project3.service.admin.GvService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;

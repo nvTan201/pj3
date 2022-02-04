@@ -1,9 +1,9 @@
-package com.pj3.Project3.service;
+package com.pj3.Project3.service.admin;
 
 import com.pj3.Project3.dto.LopAndKhoa;
 import com.pj3.Project3.model.lop;
-import com.pj3.Project3.repository.IGdRepository;
-import com.pj3.Project3.repository.ILopRepository;
+import com.pj3.Project3.repository.admin.IGdRepository;
+import com.pj3.Project3.repository.admin.ILopRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

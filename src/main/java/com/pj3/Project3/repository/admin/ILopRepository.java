@@ -1,4 +1,4 @@
-package com.pj3.Project3.repository;
+package com.pj3.Project3.repository.admin;
 
 import com.pj3.Project3.dto.LopAndKhoa;
 import com.pj3.Project3.model.lop;

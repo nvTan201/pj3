@@ -1,7 +1,7 @@
-package com.pj3.Project3.service;
+package com.pj3.Project3.service.admin;
 
 import com.pj3.Project3.model.khoa;
-import com.pj3.Project3.repository.IKhoaRepository;
+import com.pj3.Project3.repository.admin.IKhoaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

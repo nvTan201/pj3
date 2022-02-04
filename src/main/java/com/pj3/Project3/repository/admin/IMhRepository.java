@@ -1,4 +1,4 @@
-package com.pj3.Project3.repository;
+package com.pj3.Project3.repository.admin;
 
 import com.pj3.Project3.model.monHoc;
 import org.springframework.data.jpa.repository.JpaRepository;

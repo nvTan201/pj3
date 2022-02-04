@@ -1,4 +1,4 @@
-package com.pj3.Project3.controller;
+package com.pj3.Project3.controller.admin;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class homeController {
     @RequestMapping(value = {"/","home",""})
     public String home(){
-        return "admin/home";
+        return "redirect:/giang-day/index";
     }
 }

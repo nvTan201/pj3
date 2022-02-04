@@ -1,6 +1,6 @@
 package com.pj3.Project3.config;
 
-import com.pj3.Project3.service.configUserDetailsService;
+import com.pj3.Project3.service.admin.configUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

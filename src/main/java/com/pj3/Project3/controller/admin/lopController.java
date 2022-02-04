@@ -1,11 +1,10 @@
-package com.pj3.Project3.controller;
+package com.pj3.Project3.controller.admin;
 
 import com.pj3.Project3.dto.LopAndKhoa;
-import com.pj3.Project3.dto.giangDayGetAll;
 import com.pj3.Project3.model.khoa;
 import com.pj3.Project3.model.lop;
-import com.pj3.Project3.service.KhoaService;
-import com.pj3.Project3.service.LopService;
+import com.pj3.Project3.service.admin.KhoaService;
+import com.pj3.Project3.service.admin.LopService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

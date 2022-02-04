@@ -1,11 +1,11 @@
-package com.pj3.Project3.controller;
+package com.pj3.Project3.controller.admin;
 
 import com.pj3.Project3.dto.LopAndKhoa;
 import com.pj3.Project3.model.hocSinh;
 import com.pj3.Project3.dto.hsLopAndKhoa;
 import com.pj3.Project3.model.lop;
-import com.pj3.Project3.service.HsService;
-import com.pj3.Project3.service.LopService;
+import com.pj3.Project3.service.admin.HsService;
+import com.pj3.Project3.service.admin.LopService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/hoc-sinh")
