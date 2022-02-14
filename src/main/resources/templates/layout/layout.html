@@ -92,71 +92,71 @@
         </div>
 
         <!-- Sidebar Menu -->
-
-        <nav class="mt-2">
-            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                <!-- Add icons to the links using the .nav-icon class
-                   with font-awesome or any other icon font library -->
-                <li class="nav-item menu-open">
-                <a th:href="@{/giang-day/index}" class="nav-link">
-                    <i class="nav-icon fas fa-th"></i>
-                    <p>
-                        Quản Lý Giảng Dạy
-                    </p>
-                </a>
-                </li>
-                <li class="nav-item menu-open">
-                    <a th:href="@{/khoa/index}" class="nav-link">
+        <div sec:authorize="hasRole('ROLE_ADMIN')">
+            <nav class="mt-2">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                    <!-- Add icons to the links using the .nav-icon class
+                       with font-awesome or any other icon font library -->
+                    <li class="nav-item menu-open">
+                    <a th:href="@{/giang-day/index}" class="nav-link">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
-                            Quản Lý Khóa Học
+                            Quản Lý Giảng Dạy
                         </p>
                     </a>
-                </li>
-                <li class="nav-item menu-open">
-                    <a th:href="@{/mon-hoc/index}" class="nav-link">
-                        <i class="nav-icon fas fa-th"></i>
-                        <p>
-                            Quản Lý Môn Học
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item menu-open">
-                    <a th:href="@{/lop/index}" class="nav-link">
-                        <i class="nav-icon fas fa-th"></i>
-                        <p>
-                            Quản Lý Lớp Học
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item menu-open">
-                    <a th:href="@{/hoc-sinh/index}" class="nav-link">
-                        <i class="nav-icon fas fa-chart-pie"></i>
-                        <p>
-                            Quản Lý Học Sinh
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item menu-open">
-                    <a th:href="@{/giao-vien/index}" class="nav-link">
-                        <i class="nav-icon fas fa-chart-pie"></i>
-                        <p>
-                            Quản Lý Giáo Viên
-                        </p>
-                    </a>
-                </li>
-<!--                <li class="nav-item menu-open">-->
-<!--                    <a href="#" class="nav-link active">-->
-<!--                        <i class="nav-icon fas fa-tachometer-alt"></i>-->
-<!--                        <p>-->
-<!--                            Quản Lý Năm Học-->
-<!--                            <i class="right fas fa-angle-left"></i>-->
-<!--                        </p>-->
-<!--                    </a>-->
-<!--                </li>-->
-            </ul>
-        </nav>
-
+                    </li>
+                    <li class="nav-item menu-open">
+                        <a th:href="@{/khoa/index}" class="nav-link">
+                            <i class="nav-icon fas fa-th"></i>
+                            <p>
+                                Quản Lý Khóa Học
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item menu-open">
+                        <a th:href="@{/mon-hoc/index}" class="nav-link">
+                            <i class="nav-icon fas fa-th"></i>
+                            <p>
+                                Quản Lý Môn Học
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item menu-open">
+                        <a th:href="@{/lop/index}" class="nav-link">
+                            <i class="nav-icon fas fa-th"></i>
+                            <p>
+                                Quản Lý Lớp Học
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item menu-open">
+                        <a th:href="@{/hoc-sinh/index}" class="nav-link">
+                            <i class="nav-icon fas fa-chart-pie"></i>
+                            <p>
+                                Quản Lý Học Sinh
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item menu-open">
+                        <a th:href="@{/giao-vien/index}" class="nav-link">
+                            <i class="nav-icon fas fa-chart-pie"></i>
+                            <p>
+                                Quản Lý Giáo Viên
+                            </p>
+                        </a>
+                    </li>
+    <!--                <li class="nav-item menu-open">-->
+    <!--                    <a href="#" class="nav-link active">-->
+    <!--                        <i class="nav-icon fas fa-tachometer-alt"></i>-->
+    <!--                        <p>-->
+    <!--                            Quản Lý Năm Học-->
+    <!--                            <i class="right fas fa-angle-left"></i>-->
+    <!--                        </p>-->
+    <!--                    </a>-->
+    <!--                </li>-->
+                </ul>
+            </nav>
+        </div>
     </div>
     <!-- /.sidebar -->
 </aside>
