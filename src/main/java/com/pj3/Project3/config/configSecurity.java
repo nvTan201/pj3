@@ -14,6 +14,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @EnableWebSecurity
 public class configSecurity extends WebSecurityConfigurerAdapter {
 
+    @Autowired
+    private SimpleAuthenticationSuccessHandler successHandler;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
@@ -26,8 +29,8 @@ public class configSecurity extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginProcessingUrl("/j_spring_security_check")
                 .loginPage("/login")
+                .and().formLogin().successHandler(successHandler)
                 .permitAll()
-                .defaultSuccessUrl("/home")
                 .failureUrl("/login?error=true")
                 .usernameParameter("email")
                 .passwordParameter("pass")
