@@ -1,5 +1,6 @@
 package com.pj3.Project3.service.admin;
 
+import com.pj3.Project3.dto.hsAndDiem;
 import com.pj3.Project3.model.hocSinh;
 import com.pj3.Project3.dto.hsLopAndKhoa;
 import com.pj3.Project3.repository.admin.IHsRepository;
@@ -51,13 +52,17 @@ public class HsService{
         return null;
     }
 
-    public hocSinh destroy(long id){
+    public hocSinh destroy(Long id){
         hocSinh hsById = iHsRepository.getById(id);
         if(hsById != null && hsById.getTrangThai() == 1){
             hsById.setTrangThai(0);
             return iHsRepository.save(hsById);
         }
         return null;
+    }
+
+    public List<hsAndDiem> getByIdLop(Long id){
+        return iHsRepository.findByHs(id);
     }
 
 }

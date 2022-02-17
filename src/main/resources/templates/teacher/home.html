@@ -8,13 +8,13 @@
 >
 <head>
     <meta charset="UTF-8">
-    <title>Quản Lý Lịch Học</title>
+    <title>Quản Lý Lớp Học Theo Giáo Viên</title>
 </head>
 <body>
 <div class="content-wrapper" layout:fragment="content" >
     <div class="content-header">
         <div class="container-fluid">
-             <div class="row mb-2">
+            <div class="row mb-2">
                 <div class="col-sm-6">
                     <h1 class="m-0">Quản Lý Công Việc Của Giáo Viên</h1>
                 </div><!-- /.col -->
@@ -26,16 +26,17 @@
             <!-- Small boxes (Stat box) -->
             <div class="row">
                 <!-- ./col -->
-                <div class="col-lg-3 col-6" th:each="lops, item : ${lops}">
+                <div class="col-lg-3 col-6" th:each="rs, item : ${rs}">
                     <!-- small box -->
-                    <div class="small-box bg-success">
+                    <div class="small-box bg-info">
                         <div class="inner">
-                            <h3 th:utext="${lops.tenLop}"></h3>
+                            <h3 th:utext="${rs.getTen_lop()}"></h3>
+                            <p th:text="${rs.getTen_mon()}"></p>
                         </div>
                         <div class="icon">
-                            <i class="ion ion-pie-graph"></i>
+                            <i class="ion ion-person-add"></i>
                         </div>
-                        <a th:href="@{/giang-day/detail/{id}(id=${lops.maLop})}" class="small-box-footer">Chi Tiết <i class="fas fa-arrow-circle-right"></i></a>
+                        <a th:href="@{/teacher/class/detail/{id}(id=${rs.getMa_lop()})}" class="small-box-footer">Chi Tiết <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
             </div>

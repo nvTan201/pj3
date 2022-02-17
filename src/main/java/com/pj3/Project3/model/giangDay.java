@@ -1,6 +1,8 @@
 package com.pj3.Project3.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "giangday")
@@ -34,6 +36,9 @@ public class giangDay {
 
     @Column(name = "chuNghiem")
     private int chuNghiem;
+
+    @OneToMany(mappedBy = "giangDay")
+    private List<diem> diems = new ArrayList<>();
 
     public giangDay() {
     }

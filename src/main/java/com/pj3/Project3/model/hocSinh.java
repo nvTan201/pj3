@@ -3,7 +3,9 @@ package com.pj3.Project3.model;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "hocsinh")
@@ -38,6 +40,9 @@ public class hocSinh {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "maLop")
     private lop lop;
+
+    @OneToMany(mappedBy = "hocSinh")
+    private List<diem> diems = new ArrayList<>();
 
     public hocSinh() {
     }

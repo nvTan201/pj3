@@ -23,7 +23,8 @@ public class GdService {
         return iGdRepository.findGdByIdLop(id);
     }
 
-    public giangDay addGd(giangDay giangDay){
+    public giangDay addGd(giangDay giangDay, Long id){
+        giangDay gd = iGdRepository.checkChuNghiem(id);
         if (giangDay != null){
             iGdRepository.save(giangDay);
         }
@@ -54,4 +55,22 @@ public class GdService {
         }
         return null;
     }
+
+    public List<giangDayGetAll> findGdByGv(Long gv, int nh){
+        List<giangDayGetAll> lops = iGdRepository.findGdByGv(gv,nh);
+        if(lops != null){
+            return lops;
+        }
+        return null;
+    }
+
+    public giangDayGetAll findMasterClass(Long gv, int nh){
+        Optional<giangDayGetAll> gd = iGdRepository.findMasterClass(gv, nh);
+        if(gd != null){
+            giangDayGetAll rs = gd.get();
+            return rs;
+        }
+        return null;
+    }
+
 }

@@ -56,6 +56,8 @@ public class giaoVien {
     public giaoVien() {
     }
 
+
+
     public Long getMaGv() {
         return maGv;
     }

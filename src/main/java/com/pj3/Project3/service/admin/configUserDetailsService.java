@@ -17,7 +17,7 @@ public class configUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username){
 
-        giaoVien giaoVien = gvService.loginGv(username);
+        giaoVien giaoVien = gvService.findOne(username);
         if (giaoVien != null){
             return new customUserDetails(giaoVien);
         }else {

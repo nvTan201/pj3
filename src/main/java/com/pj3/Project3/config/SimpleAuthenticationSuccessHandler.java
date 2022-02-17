@@ -32,7 +32,7 @@ public class SimpleAuthenticationSuccessHandler implements AuthenticationSuccess
                 }
             } else if(authority.getAuthority().equals("ROLE_USER")) {
                 try {
-                    redirectStrategy.sendRedirect(request, response, "/teacher");
+                    redirectStrategy.sendRedirect(request, response, "/teacher/class/index");
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

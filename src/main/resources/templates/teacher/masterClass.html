@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>lớp chủ nghiệm</title>
+</head>
+<body>
+<div class="content-wrapper" layout:fragment="content" >
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Lớp Chủ Nghiệm:
+                    <p th:text="${rs.getTen_lop()}"></p>
+                        <p th:text="${rs.getTen_mon()}"></p>
+                    </h1>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <section class="content">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">Danh sách học sinh</h2>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                <table id="example1" class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                        <th>Stt</th>
+                        <th>Họ Tên</th>
+                        <th>Ngày Sinh</th>
+                        <th>Giới Tính</th>
+                        <th style="color: #00BFFF;text-align: center;" ></th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="hs , item : ${hs}">
+                        <th th:text = "${item.index+1}"></th>
+                        <th th:text = "${hs.getHo_ten_hs()}"></th>
+                        <th th:text = "${hs.getNgay_sinh()}"></th>
+                        <th th:text = "${hs.getGioi_tinh()==1?'Nam':'Nữ'}"></th>
+                        <th style="text-align: center;" th:if="!${hs.getTrang_thai()}" >
+                            <a href="" class="btn btn-block btn-outline-warning btn-sm add" data-toggle="modal" data-target="#addDiem">
+                                <i class="fa-solid fa-calendar-lines-pen"></i>
+                                nhập điểm
+                            </a>
+                        </th>
+                        <th style="text-align: center;" th:if="${hs.getTrang_thai()}" >
+                            <a th:data-url="@{teacher/diem/view}" class="btn btn-block btn-outline-primary btn-sm view" data-toggle="modal" data-target="#viewDiem">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                                xem điểm
+                            </a>
+                        </th>
+                    </tr>
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <th>Stt</th>
+                        <th>Họ Tên</th>
+                        <th>Ngày Sinh</th>
+                        <th>Giới Tính</th>
+                        <th style="color: #00BFFF;text-align: center;" ></th>
+
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+            <div class="modal fade" id="addDiem">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Nhập Điểm</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>One fine body&hellip;</p>
+                        </div>
+                        <div class="modal-footer justify-content-between">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+            </div>
+
+            <script>
+                $(".edit").click(function(e){
+                    e.preventDefault();
+                    var url = "http://localhost:8080" + $(this).attr('data-url');
+
+                    <!-- alert(url);-->
+
+                    $.ajax({
+                        type:"GET",
+                        url: url,
+                        success: function(data){
+                            console.log(data);
+                            $("#nameKhoae").val(data.tenKhoa);
+                            $("#namNhapHoce").val(data.namNhapHoc);
+                            $("#hoce").val(data.hoc).attr('selected','selected');
+                            $("#formE").attr('action', url);
+                        }
+                    });
+                });
+            </script>
+
+            <div class="modal fade" id="viewDiem">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Xem Điểm</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>One fine body&hellip;</p>
+                        </div>
+                        <div class="modal-footer justify-content-between">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+            </div>
+            <!-- /.card-body -->
+        </div>
+    </section>
+</div>
+</body>
+</html>

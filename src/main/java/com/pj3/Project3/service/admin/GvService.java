@@ -56,7 +56,7 @@ public class GvService {
 		return null;
 	}
 
-	public giaoVien loginGv(String email){
+	public giaoVien findOne(String email){
 		Optional<giaoVien> rs = iGvRepository.findByEmailGv(email);
 		giaoVien giaoVien = null;
 		if (rs != null){

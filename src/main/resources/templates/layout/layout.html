@@ -92,6 +92,7 @@
         </div>
 
         <!-- Sidebar Menu -->
+        <!-- ADMIN-->
         <div sec:authorize="hasRole('ROLE_ADMIN')">
             <nav class="mt-2">
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
@@ -154,6 +155,39 @@
     <!--                        </p>-->
     <!--                    </a>-->
     <!--                </li>-->
+                </ul>
+            </nav>
+        </div>
+        <!-- USER-->
+        <div sec:authorize="hasRole('ROLE_USER')">
+            <nav class="mt-2">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                    <!-- Add icons to the links using the .nav-icon class
+                       with font-awesome or any other icon font library -->
+                    <li class="nav-item menu-open">
+                        <a th:href="@{/teacher/class/index}" class="nav-link">
+                            <i class="nav-icon fas fa-th"></i>
+                            <p>
+                                Các Lớp Dảm Nhiệm
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item menu-open">
+                        <a th:href="@{/teacher/class/master}" class="nav-link">
+                            <i class="nav-icon fas fa-th"></i>
+                            <p>
+                                Lớp Chủ Ngiệm
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item menu-open">
+                        <a th:href="@{/mon-hoc/index}" class="nav-link">
+                            <i class="nav-icon fas fa-th"></i>
+                            <p>
+                                Quản Lý Môn Học
+                            </p>
+                        </a>
+                    </li>
                 </ul>
             </nav>
         </div>
