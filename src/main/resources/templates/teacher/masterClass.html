@@ -49,13 +49,13 @@
                         <th th:text = "${hs.getNgay_sinh()}"></th>
                         <th th:text = "${hs.getGioi_tinh()==1?'Nam':'Nữ'}"></th>
                         <th style="text-align: center;" th:if="!${hs.getTrang_thai()}" >
-                            <a href="" class="btn btn-block btn-outline-warning btn-sm add" data-toggle="modal" data-target="#addDiem">
+                            <a th:data-url="@{teacher/diem/view/{id}(id = ${hs.getMa_diem()==null?'0':hs.getMa_diem()})}" class="btn btn-block btn-outline-warning btn-sm add" data-toggle="modal" data-target="#addDiem">
                                 <i class="fa-solid fa-calendar-lines-pen"></i>
                                 nhập điểm
                             </a>
                         </th>
                         <th style="text-align: center;" th:if="${hs.getTrang_thai()}" >
-                            <a th:data-url="@{teacher/diem/view}" class="btn btn-block btn-outline-primary btn-sm view" data-toggle="modal" data-target="#viewDiem">
+                            <a th:data-url="@{teacher/diem/view/{id}(id = ${hs.getMa_diem()==null?'0':hs.getMa_diem()})}" class="btn btn-block btn-outline-primary btn-sm view" data-toggle="modal" data-target="#viewDiem">
                                 <i class="fa-solid fa-pen-to-square"></i>
                                 xem điểm
                             </a>
@@ -74,6 +74,64 @@
                     </tfoot>
                 </table>
             </div>
+
+            <script>
+                $(".add").click(function(e){
+                    e.preventDefault();
+                    var url = "http://localhost:8080/" + $(this).attr('data-url');
+<!--                    alert(url);-->
+
+                    $.ajax({
+                        type:"GET",
+                        url: url,
+                        success: function(data){
+                            console.log(data);
+                            $("#dlt1").val(data.diemLyThuyet);
+                            $("#dth1").val(data.diemThucHanh);
+
+                            var dlt = $("#dlt1").val();
+                            var dth = $("#dth1").val();
+                            $("#addDlt2").hide();
+                            $("#addDth2").hide();
+                            if(dlt){
+                                $( "#dlt1" ).prop("disabled", true);
+                                $("#addDlt2").show();
+                            }
+                            if(dth){
+                                $( "#dth1" ).prop("disabled", true);
+                                $("#addDth2").show();
+                            }
+                        }
+                    });
+                });
+
+                $(".view").click(function(e){
+                    e.preventDefault();
+                    var url = "http://localhost:8080/" + $(this).attr('data-url');
+<!--                    alert(url);-->
+
+                    $.ajax({
+                        type:"GET",
+                        url: url,
+                        success: function(data){
+                            console.log(data);
+                            $("#vDlt1").val(data.diemLyThuyet);
+                            $("#vDth1").val(data.diemThucHanh);
+                            $("#vDlt2").val(data.diemLyThuyet1);
+                            $("#vDth2").val(data.diemThucHanh1);
+                            $("#vDtb").val(data.diemTb);
+                            var kp = data.ketQua;
+                            if(kp == 1){
+                                $("#vKp").val("qua môn");
+                            } else {
+                                $("#vKp").val("học lại");
+                            }
+
+                        }
+                    });
+                });
+            </script>
+
             <div class="modal fade" id="addDiem">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
@@ -84,7 +142,39 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <p>One fine body&hellip;</p>
+                            <div class="card card-warning">
+                                <div class="card-body">
+                                    <form>
+                                        <div class="row">
+                                            <div class="col-sm-6" id="addDlt1">
+                                                <div class="form-group">
+                                                    <label>Điểm lý thuyết (lần 1)</label>
+                                                    <input type="text" class="form-control" min="0" max="10" id="dlt1" placeholder="Nhập Điểm">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6" id="addDth1">
+                                                <div class="form-group">
+                                                    <label>Điểm thực hành (lần 1)</label>
+                                                    <input type="text" class="form-control" min="0" max="10" id="dth1" placeholder="Nhập Điểm">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6" id="addDlt2">
+                                                <div class="form-group">
+                                                    <label>Điểm lý thuyết (lần 2)</label>
+                                                    <input type="text" class="form-control" min="0" max="10" id="dlt2" placeholder="Nhập Điểm">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6" id="addDth2">
+                                                <div class="form-group">
+                                                    <label>Điểm thực hành (lần 2)</label>
+                                                    <input type="text" class="form-control" min="0" max="10" id="dth2" placeholder="Nhập Điểm">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
                         </div>
                         <div class="modal-footer justify-content-between">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -95,25 +185,9 @@
                 </div>
             </div>
 
+<!--            thêm điểm -->
             <script>
-                $(".edit").click(function(e){
-                    e.preventDefault();
-                    var url = "http://localhost:8080" + $(this).attr('data-url');
 
-                    <!-- alert(url);-->
-
-                    $.ajax({
-                        type:"GET",
-                        url: url,
-                        success: function(data){
-                            console.log(data);
-                            $("#nameKhoae").val(data.tenKhoa);
-                            $("#namNhapHoce").val(data.namNhapHoc);
-                            $("#hoce").val(data.hoc).attr('selected','selected');
-                            $("#formE").attr('action', url);
-                        }
-                    });
-                });
             </script>
 
             <div class="modal fade" id="viewDiem">
@@ -126,11 +200,58 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <p>One fine body&hellip;</p>
+                            <div class="card card-warning">
+                                <div class="card-body">
+                                    <form>
+                                        <div class="row">
+                                            <div class="col-sm-6" id="viewDlt1">
+                                                <div class="form-group">
+                                                    <label>Điểm lý thuyết (lần 1)</label>
+                                                    <input type="text" id="vDlt1" class="form-control" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6" id="viewDth1">
+                                                <div class="form-group">
+                                                    <label>Điểm thực hành (lần 1)</label>
+                                                    <input type="text" id="vDth1" class="form-control" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6" id="viewDlt2">
+                                                <div class="form-group">
+                                                    <label>Điểm lý thuyết (lần 2)</label>
+                                                    <input type="text" id="vDlt2" class="form-control" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6" id="viewDth2">
+                                                <div class="form-group">
+                                                    <label>Điểm thực hành (lần 2)</label>
+                                                    <input type="text" id="vDth2" class="form-control" disabled>
+                                                </div>
+                                            </div>
+                                            <center>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label>Điểm tb</label>
+                                                        <input type="text" id="vDtb" class="form-control" disabled>
+                                                    </div>
+                                                </div>
+                                            </center>
+                                            <center>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label>Kết quả</label>
+                                                        <input type="text" id="vKp" class="form-control" disabled>
+                                                    </div>
+                                                </div>
+                                            </center>
+                                        </div>
+                                    </form>
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
                         </div>
                         <div class="modal-footer justify-content-between">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
                         </div>
                     </div>
                     <!-- /.modal-content -->
