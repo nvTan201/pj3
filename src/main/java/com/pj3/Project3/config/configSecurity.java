@@ -24,6 +24,9 @@ public class configSecurity extends WebSecurityConfigurerAdapter {
                 .antMatchers("/dist/**","/plugins/**").permitAll()
                 .anyRequest().authenticated();
 
+        http
+                .csrf().disable();
+
         http.authorizeRequests()
                 .and()
                 .formLogin()

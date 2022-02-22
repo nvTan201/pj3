@@ -25,8 +25,11 @@ public class GdService {
 
     public giangDay addGd(giangDay giangDay, Long id){
         giangDay gd = iGdRepository.checkChuNghiem(id);
-        if (giangDay != null){
-            iGdRepository.save(giangDay);
+        if (gd == null){
+            if (giangDay != null){
+                iGdRepository.save(giangDay);
+            }
+            return null;
         }
         return null;
     }
@@ -69,6 +72,14 @@ public class GdService {
         if(gd != null){
             giangDayGetAll rs = gd.get();
             return rs;
+        }
+        return null;
+    }
+
+    public giangDay getIdGd(Long maGv, Long maLop, Long maMon){
+        giangDay id = iGdRepository.getIdGd(maGv, maLop, maMon);
+        if (id != null){
+            return id;
         }
         return null;
     }

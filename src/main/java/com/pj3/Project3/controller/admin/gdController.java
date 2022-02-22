@@ -61,12 +61,13 @@ public class gdController {
     }
 
     @PostMapping("add")
-    public RedirectView add(@RequestParam() int namhoc, @RequestParam() String hocky,@RequestParam() giaoVien giaovien
-        ,@RequestParam() monHoc mon,@RequestParam()int chuNghiem, @RequestParam() lop lop){
+    public RedirectView add(@RequestParam() int namhoc, @RequestParam() String hocky, @RequestParam() giaoVien giaovien
+        , @RequestParam() monHoc mon, @RequestParam()int chuNghiem, @RequestParam() lop lop){
         giangDay giangDay = new giangDay(namhoc, hocky, giaovien, mon, lop,0,chuNghiem);
         gdService.addGd(giangDay, giaovien.getMaGv());
         String url = "/giang-day/detail/" + lop.getMaLop();
         return new RedirectView(url);
+//        return giangDay;
     }
 
     @GetMapping("/edit/{id}")

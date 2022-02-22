@@ -68,4 +68,8 @@ public interface IGdRepository extends JpaRepository<giangDay, Long> {
             "AND gd.nam_hoc = ?\n" +
             "AND gd.chu_nghiem = 1\n", nativeQuery = true)
     Optional<giangDayGetAll> findMasterClass(Long gv, int nh);
+
+    @Query(value = "SELECT * FROM giangday\n" +
+            "WHERE ma_gv = ?1 AND ma_lop = ?2 AND ma_mon = ?3", nativeQuery = true)
+    giangDay getIdGd(Long maGv, Long maLop, Long maMon);
 }

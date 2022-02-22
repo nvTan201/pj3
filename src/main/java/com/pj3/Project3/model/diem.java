@@ -1,5 +1,7 @@
 package com.pj3.Project3.model;
 
+import org.springframework.lang.Nullable;
+
 import javax.persistence.*;
 
 @Entity
