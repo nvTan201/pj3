@@ -8,6 +8,7 @@ import com.pj3.Project3.service.admin.HsService;
 import com.pj3.Project3.service.admin.LopService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +25,9 @@ public class hsController {
 
     @Autowired
     private LopService lopService;
+
+    @Autowired
+    BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @GetMapping("/index")
     public String getAllHs(HttpServletRequest request){
@@ -43,7 +47,8 @@ public class hsController {
     public String addProcess(@RequestParam() String name, @RequestParam() @DateTimeFormat(pattern="yyyy-MM-dd") Date date,
                              @RequestParam() int gioiTinh,@RequestParam() String sdt,
                              @RequestParam() String email,@RequestParam() lop lop){
-        hocSinh hocSinh = new hocSinh(name, date, gioiTinh, email, "1", sdt, 1, lop);
+        String pass = bCryptPasswordEncoder.encode("123");
+        hocSinh hocSinh = new hocSinh(name, date, gioiTinh, email, pass, sdt, 1, lop);
         hsservice.addHs(hocSinh);
         return "redirect:/hoc-sinh/index";
     }

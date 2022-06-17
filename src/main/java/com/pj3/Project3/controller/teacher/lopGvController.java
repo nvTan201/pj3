@@ -2,9 +2,7 @@ package com.pj3.Project3.controller.teacher;
 
 import com.pj3.Project3.dto.giangDayGetAll;
 import com.pj3.Project3.dto.hsAndDiem;
-import com.pj3.Project3.dto.hsLopAndKhoa;
 import com.pj3.Project3.model.giaoVien;
-import com.pj3.Project3.model.lop;
 import com.pj3.Project3.service.admin.GdService;
 import com.pj3.Project3.service.admin.GvService;
 import com.pj3.Project3.service.admin.HsService;
@@ -68,13 +66,19 @@ public class lopGvController {
     }
 
     @GetMapping("/detail/{id}")
-    public String detailClass(@PathVariable() Long id, Model model){
+    public String detailClass(@PathVariable() Long id, HttpServletRequest request, Model model, Long mon){
 
-        lop rs = lopService.findByIdLop(id);
+        int nh = new Date().getYear()+1900;
+        Principal userPrincipal = request.getUserPrincipal();
+        String email = userPrincipal.getName();
+        giaoVien gv = gvService.findOne(email);
+        Long idGv = gv.getMaGv();
+
+        giangDayGetAll rs = gdService.getGdByGv(idGv, id, mon, nh);
         List<hsAndDiem> hs = hsService.getByIdLop(id);
-
-        model.addAttribute("hs", hs);
+//        return rs;
         model.addAttribute("rs", rs);
+        model.addAttribute("hs", hs);
         return "teacher/detailClass";
     }
 }

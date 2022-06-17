@@ -36,7 +36,12 @@
                         <div class="icon">
                             <i class="ion ion-person-add"></i>
                         </div>
-                        <a th:href="@{/teacher/class/detail/{id}(id=${rs.getMa_lop()})}" class="small-box-footer">Chi Tiết <i class="fas fa-arrow-circle-right"></i></a>
+                        <form th:action="@{/teacher/class/detail/{id}(id=${rs.getMa_lop()})}" class="small-box-footer">
+                            <input type="hidden" name="mon" th:value="${rs.getMa_mon()}">
+                            <button class="small-box-footer">
+                                Chi Tiết <i class="fas fa-arrow-circle-right"></i>
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>

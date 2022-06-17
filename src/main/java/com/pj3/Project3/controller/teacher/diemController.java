@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
@@ -55,15 +56,16 @@ public class diemController {
     public String addDiem(@RequestParam() @Nullable Long lop, @RequestParam() @Nullable Long mon,
                           @RequestParam() @Nullable Float dlt, @RequestParam() @Nullable Float dth,
                           @RequestParam() int trangThai, @RequestParam Long idHs,
-                          HttpServletRequest request){
+                          HttpServletRequest request
+    ){
         Principal userPrincipal = request.getUserPrincipal();
         String email = userPrincipal.getName();
         giaoVien gv = gvService.findOne(email);
         Long id = gv.getMaGv();
         giangDay gd = gdService.getIdGd(id,lop,mon);
         hocSinh hs = hsService.findByIdHs(idHs);
-        diem diem =null;
-        Integer ketQua = null;
+        diem diem = null;
+        Integer ketQua = 0;
         if (trangThai == 1){
             if(dlt != null && dlt >=5){
                 ketQua = 1;
@@ -115,12 +117,10 @@ public class diemController {
             }
         } else {
             diem.setDiemLyThuyet(dlt);
-            if(dlt == null){
-                if ((rs.getDiemLyThuyet())/2 >= 5) {
-                    ketQua = 1;
-                }
-            }else {
-                if (trangThai == 1) {
+            if (trangThai == 1) {
+                if(dlt == null){
+                    ketQua = null;
+                }else {
                     if (dlt >= 5) {
                         ketQua = 1;
                     }
@@ -146,14 +146,10 @@ public class diemController {
                 }
             } else {
                 diem.setDiemThucHanh(dth);
-                if (dth == null) {
-                    if (rs.getDiemThucHanh() != null) {
-                        if ((rs.getDiemThucHanh()) / 2 >= 5) {
-                            ketQua = 1;
-                        }
-                    }
-                } else {
-                    if (trangThai == 1) {
+                if (trangThai == 1) {
+                    if (dth == null) {
+                        ketQua = null;
+                    } else {
                         if (dth >= 5) {
                             ketQua = 1;
                         }
@@ -172,6 +168,130 @@ public class diemController {
 
         diemService.editDiem(diem, id);
         return "redirect:/teacher/class/master";
+//        return diem;
+    }
+
+    @PostMapping("/add-by-class")
+    public RedirectView addDiemByClass(@RequestParam() @Nullable Long lop, @RequestParam() @Nullable Long mon,
+                                       @RequestParam() @Nullable Float dlt, @RequestParam() @Nullable Float dth,
+                                       @RequestParam() int trangThai, @RequestParam Long idHs,
+                                       HttpServletRequest request
+    ){
+        Principal userPrincipal = request.getUserPrincipal();
+        String email = userPrincipal.getName();
+        giaoVien gv = gvService.findOne(email);
+        Long id = gv.getMaGv();
+        giangDay gd = gdService.getIdGd(id,lop,mon);
+        hocSinh hs = hsService.findByIdHs(idHs);
+        diem diem = null;
+        Integer ketQua = null;
+        if (trangThai == 1){
+            if(dlt != null && dlt >=5){
+                ketQua = 1;
+            } else if(dth != null && dth >=5){
+                ketQua = 1;
+            } else if(dlt != null && dth != null && dlt >=5 && dth >=5){
+                ketQua = 1;
+            }
+        }
+
+        diem = new diem(dlt, null, dth, null, trangThai, null, ketQua, hs, gd);
+
+        diemService.addDiem(diem);
+
+        String url = "/teacher/class/detail/" + lop + "?mon=" + mon;
+
+        return new RedirectView(url);
+//        return diem;
+    }
+
+    @PostMapping("/edit-by-class/{id}")
+    public RedirectView editDiemByClass(@RequestParam() @Nullable Long lop, @RequestParam() @Nullable Long mon,
+                                        @RequestParam() @Nullable Float dlt, @RequestParam() @Nullable Float dth,
+                                        @RequestParam() int trangThai, @RequestParam Long idHs,
+                                        @PathVariable() Long id, HttpServletRequest request
+    ){
+
+        Principal userPrincipal = request.getUserPrincipal();
+        String email = userPrincipal.getName();
+        giaoVien gv = gvService.findOne(email);
+        Long idGv = gv.getMaGv();
+        giangDay gd = gdService.getIdGd(idGv,lop,mon);
+        hocSinh hs = hsService.findByIdHs(idHs);
+        Integer ketQua = null;
+
+        diem rs = diemService.findById(id);
+        diem diem = new diem(null, null, null, null, trangThai, null, null, hs, gd);;
+
+        if (rs.getDiemLyThuyet() != null) {
+            diem.setDiemLyThuyet(rs.getDiemLyThuyet());
+            diem.setDiemLyThuyet1(dlt);
+            if (trangThai == 1) {
+                if(dlt == null){
+                    if ((rs.getDiemLyThuyet())/2 >= 5) {
+                        ketQua = 1;
+                    }
+                }else {
+                    if ((rs.getDiemLyThuyet() + dlt) / 2 >= 5) {
+                        ketQua = 1;
+                    }
+                }
+            }
+        } else {
+            diem.setDiemLyThuyet(dlt);
+            if (trangThai == 1) {
+                if(dlt == null){
+                    ketQua = null;
+                }else {
+                    if (dlt >= 5) {
+                        ketQua = 1;
+                    }
+                }
+            }
+        }
+        if(ketQua != null) {
+            if (rs.getDiemThucHanh() != null) {
+                diem.setDiemThucHanh(rs.getDiemThucHanh());
+                diem.setDiemThucHanh1(dth);
+                if (trangThai == 1) {
+                    if (dth == null) {
+                        if (rs.getDiemThucHanh() != null) {
+                            if ((rs.getDiemThucHanh()) / 2 >= 5) {
+                                ketQua = 1;
+                            }
+                        }
+                    } else {
+                        if ((rs.getDiemThucHanh() + dth) / 2 >= 5) {
+                            ketQua = 1;
+                        }
+                    }
+                }
+            } else {
+                diem.setDiemThucHanh(dth);
+                if (trangThai == 1) {
+                    if (dth == null) {
+                        ketQua = 1;
+                    } else {
+                        if (dth >= 5) {
+                            ketQua = 1;
+                        }
+                    }
+                }
+            }
+        } else {
+            if (rs.getDiemThucHanh()!=null) {
+                diem.setDiemThucHanh(rs.getDiemThucHanh());
+                diem.setDiemThucHanh1(dth);
+            } else {
+                diem.setDiemThucHanh(dth);
+            }
+        }
+        diem.setKetQua(ketQua);
+
+        diemService.editDiem(diem, id);
+        String url = "/teacher/class/detail/" + lop + "?mon="+ mon;
+
+        return new RedirectView(url);
 //        return diem;
     }
 }

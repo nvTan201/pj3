@@ -23,8 +23,8 @@ public class GdService {
         return iGdRepository.findGdByIdLop(id);
     }
 
-    public giangDay addGd(giangDay giangDay, Long id){
-        giangDay gd = iGdRepository.checkChuNghiem(id);
+    public giangDay addGd(giangDay giangDay, Long id, Long idLop){
+        giangDay gd = iGdRepository.checkChuNghiem(id, idLop);
         if (gd == null){
             if (giangDay != null){
                 iGdRepository.save(giangDay);
@@ -80,6 +80,14 @@ public class GdService {
         giangDay id = iGdRepository.getIdGd(maGv, maLop, maMon);
         if (id != null){
             return id;
+        }
+        return null;
+    }
+
+    public giangDayGetAll getGdByGv(Long maGv, Long maLop, Long maMon, int nh){
+        giangDayGetAll rs = iGdRepository.getGdByGv(maGv, maLop, maMon, nh);
+        if (rs != null){
+            return rs;
         }
         return null;
     }

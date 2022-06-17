@@ -155,7 +155,9 @@
                             var kp = data.ketQua;
                             if(kp == 1){
                                 $("#vKp").val("qua môn");
-                            } else {
+                            } else if (kp){
+                                $("#vKp").val("học lại");
+                            }else {
                                 $("#vKp").val("học lại");
                             }
 
@@ -229,28 +231,6 @@
                     <!-- /.modal-content -->
                 </div>
             </div>
-
-            <script>
-                $("#save").click(function(e){
-                    e.preventDefault();
-                    var url = $(this).attr('data-url');
-
-
-
-                    alert(url);
-                    $.ajax({
-                        type:"POST",
-                        url: url,
-                        data:{
-                            dly:dlt,
-                            dth:dth,
-                        }
-                        success: function(data){
-
-                        }
-                    });
-                })
-            </script>
 
             <div class="modal fade" id="viewDiem">
                 <div class="modal-dialog modal-lg">
