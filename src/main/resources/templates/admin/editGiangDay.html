@@ -57,14 +57,14 @@
                         <option th:each="lop , item:${lop}" th:value="${lop.getMa_lop()}" th:selected="${lop.getMa_lop() == rs.getMa_lop()}" th:utext="${lop.getTen_lop()}+${lop.getTen_khoa()}">
                     </select>
                 </div>
-                <div class="form-group">
-                    <label>Chủ Nghiệm</label>
-                    <br>
-                    <input type="radio" name="chuNghiem" value="1" th:checked="${rs.getChu_nghiem() == 1}"> giáo viên chủ nghiệm
-                    <br>
-                    <input type="radio" name="chuNghiem" value="0" th:checked="${rs.getChu_nghiem() == 0}"> giáo viên bộ môn
-                    <br>
-                </div>
+<!--                <div class="form-group">-->
+<!--                    <label>Chủ Nghiệm</label>-->
+<!--                    <br>-->
+<!--                    <input type="radio" name="chuNghiem" value="1" th:checked="${rs.getChu_nghiem() == 1}"> giáo viên chủ nghiệm-->
+<!--                    <br>-->
+<!--                    <input type="radio" name="chuNghiem" value="0" th:checked="${rs.getChu_nghiem() == 0}"> giáo viên bộ môn-->
+<!--                    <br>-->
+<!--                </div>-->
                 <div class="form-group">
                     <label>Trạng Thái</label>
                     <br>

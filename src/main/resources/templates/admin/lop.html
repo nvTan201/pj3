@@ -67,7 +67,7 @@
                                             <th>Stt</th>
                                             <th>Tên Lớp</th>
                                             <th style="color: #FFD700;text-align: center;">Sửa</th>
-                                            <th style="color: #FF0000;text-align: center;">Xóa</th>
+
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -75,17 +75,10 @@
                                             <th th:text = "${item.index+1}"></th>
                                             <th th:text = "${rs.getTen_lop()}+${rs.getTen_khoa()}"></th>
                                             <th style="text-align: center;"><a th:data-url="@{/lop/edit/{id}(id=${rs.getMa_lop()})}" data-toggle="modal" data-target="#modal-sm" class="edit"><i class="fas fa-edit" style="color: #FFD700"></i></a></th>
-                                            <th style="text-align: center;"><a th:href="@{/}"><i class="fas fa-user-times" style="color: #FF0000"></i></a></th>
+<!--                                            <th style="text-align: center;"><a th:href="@{/}"><i class="fas fa-user-times" style="color: #FF0000"></i></a></th>-->
                                         </tr>
                                         </tbody>
-                                        <tfoot>
-                                        <tr>
-                                            <th>Stt</th>
-                                            <th>Tên Lớp</th>
-                                            <th style="color: #FFD700;text-align: center;">Sửa</th>
-                                            <th style="color: #FF0000;text-align: center;">Xóa</th>
-                                        </tr>
-                                        </tfoot>
+
                                     </table>
                                 </div>
                                 <!-- /.card-body -->

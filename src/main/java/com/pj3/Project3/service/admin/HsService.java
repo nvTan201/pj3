@@ -19,7 +19,9 @@ public class HsService{
     public List<hsLopAndKhoa> getAllHs() {
         return iHsRepository.displayHs();
     }
-
+    public List<hsAndDiem> getDiem(Long lop,Long mon) {
+        return iHsRepository.findHsByMon(lop,mon);
+    }
     public hocSinh addHs(hocSinh hocSinh) {
         if(hocSinh != null){
             return iHsRepository.save(hocSinh);
@@ -64,5 +66,6 @@ public class HsService{
     public List<hsAndDiem> getByIdLop(Long id){
         return iHsRepository.findByHs(id);
     }
+    public List<hsLopAndKhoa> getHsByIdLop(Long id){return  iHsRepository.findByIdLop(id);}
 
 }

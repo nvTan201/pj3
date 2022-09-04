@@ -1,10 +1,70 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}"
+>
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Quản Lý Lịch Học</title>
 </head>
 <body>
-$END$
+<div class="content-wrapper" layout:fragment="content" >
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Quản Lý Công Việc Của Giáo Viên</h1>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <section class="content">
+        <div class="container-fluid">
+            <!-- Small boxes (Stat box) -->
+            <div class="row">
+                <!-- ./col -->
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">Danh sách học sinh</h2>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <table id="example1" class="table table-bordered table-striped">
+                            <thead>
+                            <tr>
+                                <th>Stt</th>
+                                <th>Họ Tên</th>
+                                <th>Diem ly thuyet</th>
+                                <th>Diem ly thuyet 2</th>
+                                <th>Diem thuc hanh</th>
+                                <th>Diem thuc hanh 2</th>
+                                <th>Ket qua</th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="hs , item : ${hs}">
+                                <th th:text = "${item.index+1}"></th>
+                                <th th:text = "${hs.getHo_ten_hs()}"></th>
+                                <th th:text = "${hs.getDiem_ly_thuyet()}"></th>
+                                <th th:text = "${hs.getDiem_ly_thuyet1()}"></th>
+                                <th th:text = "${hs.getDiem_thuc_hanh()}"></th>
+                                <th th:text = "${hs.getDiem_thuc_hanh1()}"></th>
+                                <th th:text = "${hs.getKetQua()==1?'qua mon':'hoc lai'}"></th>
+<!--                                <th th:text = "${hs.getDiem_tb()}"></th>-->
+
+
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
 </body>
 </html>

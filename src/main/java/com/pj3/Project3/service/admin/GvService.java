@@ -16,10 +16,15 @@ public class GvService {
 	IGvRepository iGvRepository;
 
 	public List<giaoVien> getAllGv(){
+//		List<giaoVien> giaoViens =  iGvRepository.displayGvFindById(1);
+
 		return iGvRepository.displayGvFindById(1);
 	}
 
+
+
 	public giaoVien addGv(giaoVien giaoVien){
+//
 		return iGvRepository.save(giaoVien);
 	}
 

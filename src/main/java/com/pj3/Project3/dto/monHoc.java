@@ -1,2 +1,5 @@
-package com.pj3.Project3.dto;public interface monHoc {
+package com.pj3.Project3.dto;
+
+public interface monHoc {
+
 }

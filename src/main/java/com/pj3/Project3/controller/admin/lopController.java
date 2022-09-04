@@ -3,6 +3,7 @@ package com.pj3.Project3.controller.admin;
 import com.pj3.Project3.dto.LopAndKhoa;
 import com.pj3.Project3.model.khoa;
 import com.pj3.Project3.model.lop;
+import com.pj3.Project3.model.monHoc;
 import com.pj3.Project3.service.admin.KhoaService;
 import com.pj3.Project3.service.admin.LopService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 @Controller
 @RequestMapping("/lop")
@@ -36,11 +38,24 @@ public class lopController {
 
     @PostMapping("/add")
     public String addLop(@RequestParam() String tenlop, @RequestParam() khoa khoa){
-        lop rs = new lop(tenlop, khoa);
-        lopService.addLop(rs);
+        boolean check = this.checkLop(tenlop, khoa);
+        if (check){
+            lop rs = new lop(tenlop, khoa);
+            lopService.addLop(rs);
+        }
         return "redirect:/lop/index";
     }
-
+    public boolean checkLop(String tenLop, khoa khoa) {
+        List<LopAndKhoa> rs = lopService.displayLop();
+        List<khoa> k = khoaService.getAllKhoa();
+        AtomicBoolean check= new AtomicBoolean(true);
+        rs.forEach((element)->{
+            if (element.getTen_lop().equals(tenLop) || element.getTen_khoa().equals(khoa)){
+                check.set(false);
+            }
+        });
+        return check.get();
+    }
     @GetMapping("/edit/{id}")
     public ResponseEntity<lop> editLop(@PathVariable("id") Long id){
         lop rs = lopService.findByIdLop(id);

@@ -1,10 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}"
+>
 <head>
   <meta charset="UTF-8">
-  <title>$Title$</title>
+  <title>Quản Lý Lịch Học</title>
 </head>
 <body>
-$END$
+<div class="content-wrapper" layout:fragment="content" >
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0">Quản Lý Công Việc Của Giáo Viên</h1>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+  <section class="content">
+    <div class="container-fluid">
+      <!-- Small boxes (Stat box) -->
+      <div class="row">
+        <!-- ./col -->
+        <div class="col-lg-3 col-6" th:each="lops, item : ${lops}">
+          <!-- small box -->
+          <div class="small-box bg-success">
+            <div class="inner">
+              <h3 th:utext="${lops.tenLop}"></h3>
+            </div>
+            <div class="icon">
+              <i class="ion ion-pie-graph"></i>
+            </div>
+            <a th:href="@{/ql-diem/detail-lop/{id}(id=${lops.maLop})}" class="small-box-footer">Chi Tiết <i class="fas fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
 </body>
 </html>

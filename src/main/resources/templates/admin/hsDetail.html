@@ -1,10 +1,76 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}"
+>
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Thong tin sinh vien</title>
 </head>
 <body>
-$END$
+<div class="content-wrapper" layout:fragment="content" >
+    <div class="content-header">
+
+<div class="row mb-2">
+    <div class="col-sm-6">
+    </div>
+    <div class="col-sm-6">
+        <ol class="float-sm-right">
+            <ul class="">
+                <br>
+                <a th:href="@{/hoc-sinh/add}" class="btn bg-gradient-success btn-sm">
+                    thêm
+                    <i class="fas fa-plus"></i>
+                </a>
+            </ul>
+        </ol>
+    </div>
+</div>
+<div class="card-body">
+                <table id="example1" class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                        <th>Stt</th>
+                        <th>Họ Tên</th>
+                        <th>Ngày Sinh</th>
+                        <th>Giới Tính</th>
+                        <th>Email</th>
+                        <th>Sdt</th>
+                        <th>Lớp</th>
+                        <th style="color: #FFD700">Sửa</th>
+                        <th style="color: #FF0000">Xóa</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="rs , item : ${rs}">
+                        <th th:text = "${item.index+1}"></th>
+                        <th th:text = "${rs.getHo_ten_hs()}"></th>
+                        <th th:text = "${rs.getNgay_sinh()}"></th>
+                        <th th:text = "${rs.getGioi_tinh()==1?'Nam':'Nữ'}"></th>
+                        <th th:text = "${rs.getEmail_hs()}"></th>
+                        <th th:text = "${rs.getSdt()}"></th>
+                        <th th:text = "${rs.getTen_lop()}"></th>
+                        <th>
+                            <a th:href="@{/hoc-sinh/edit/{id}(id=${rs.getMa_hs()})}" class="btn btn-small">
+                                <i class="fas fa-edit" style="color: #FFD700"></i>
+                            </a>
+                        </th>
+                        <th>
+                            <form th:action="@{/hoc-sinh/destroy/{id}(id=${rs.getMa_hs()})}"
+                                  th:method="DELETE">
+                                <button class="btn btn-small"><i class="fas fa-user-times" style="color: #FF0000"></i></button>
+                            </form>
+                        </th>
+                    </tr>
+                    </tbody>
+
+                </table>
+            </div>
+    </div>
+</div>
+
 </body>
 </html>

@@ -28,7 +28,7 @@
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <form th:action="@{/mh/add}" method="post">
+                        <form th:action="@{/mon-hoc/add}" method="post">
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="nameMh">Tên Môn Học</label>
@@ -60,7 +60,7 @@
                                                 <th>Stt</th>
                                                 <th>Tên Môn</th>
                                                 <th style="color: #FFD700;text-align: center;">Sửa</th>
-                                                <th style="color: #FF0000;text-align: center;">Xóa</th>
+
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -68,18 +68,11 @@
                                                 <th th:text = "${item.index+1}"></th>
                                                 <th th:text = "${rs.tenMon}"></th>
                                                 <th style="text-align: center;"><a th:data-url="@{/mon-hoc/edit/{id}(id=${rs.maMon})}" data-toggle="modal" data-target="#modal-sm" class="edit"><i class="fas fa-edit" style="color: #FFD700"></i></a></th>
-                                                <th style="text-align: center;"><a th:data-url="@{/mon-hoc/destroy/{id}(id=${rs.maMon})}" id="delete"><i class="fas fa-user-times" style="color: #FF0000"></i></a></th>
+<!--                                                <th style="text-align: center;"><a th:data-url="@{/mon-hoc/destroy/{id}(id=${rs.maMon})}" id="delete"><i class="fas fa-user-times" style="color: #FF0000"></i></a></th>-->
 
                                             </tr>
                                             </tbody>
-                                            <tfoot>
-                                            <tr>
-                                                <th>Stt</th>
-                                                <th>Tên Môn</th>
-                                                <th style="color: #FFD700;text-align: center;">Sửa</th>
-                                                <th style="color: #FF0000;text-align: center;">Xóa</th>
-                                            </tr>
-                                            </tfoot>
+
                                         </table>
                                     </div>
                         <!-- /.card-body -->
@@ -138,7 +131,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form id="formE" method="post">
+                        <form id="formE" th:method="PUT">
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="nameMhe">Tên Môn Học</label>

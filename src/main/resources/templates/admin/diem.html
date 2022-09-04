@@ -1,10 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+<section class="content">
+    <div class="card">
+        <div class="card-header">
+            <h2 class="card-title">Danh sách học sinh</h2>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+            <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                    <th>Stt</th>
+                    <th>Họ Tên</th>
+                    <th>Ngày Sinh</th>
+                    <th>Stt</th>
+                    <th>Họ Tên</th>
+                    <th>Ngày Sinh</th>
+                    <th>Stt</th>
+                    <th>Họ Tên</th>
+                    <th>Ngày Sinh</th>
+                    <th style="color: #00BFFF;text-align: center;" ></th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="hs , item : ${hs}">
+                    <th th:text = "${item.index+1}"></th>
+                    <th th:text = "${hs.getHo_ten_hs()}"></th>
+                    <th th:text = "${hs.getNgay_sinh()}"></th>
+                    <th th:text = "${hs.getMaLop}"></th>
+                    <th th:text = "${hs.getDiemLyThuyet()}"></th>
+                    <th th:text = "${hs.getDiemLyThuyet1()}"></th>
+                    <th th:text = "${hs.getDiemThucHanh()}"></th>
+                    <th th:text = "${hs.getDiemThucHanh1()}"></th>
+                    <th th:text = "${hs.getKetQua()}"></th>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>

@@ -117,7 +117,7 @@
                                                 <th>Năm Nhập Học</th>
                                                 <th>Trạng Thái</th>
                                                 <th style="color: #FFD700;text-align: center;">Sửa</th>
-                                                <th style="color: #FF0000;text-align: center;">Xóa</th>
+
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -126,21 +126,12 @@
                                                 <th th:text = "${rs.tenKhoa}"></th>
                                                 <th th:text = "${rs.namNhapHoc}"></th>
                                                 <th th:text = "${rs.hoc <= 3?'năm '+rs.hoc:'đã ra trường'}"></th>
-                                                <th style="text-align: center;"><a th:data-url="@{/khoa/edit/{id}(id=${rs.idKhoa})}" data-toggle="modal" data-target="#modal-sm" class="edit"><i class="fas fa-edit" style="color: #FFD700"></i></a></th>
-                                                <th style="text-align: center;"><a th:data-url="@{/}"><i class="fas fa-user-times" style="color: #FF0000"></i></a></th>
+                                                <th style="text-align: center;"><a th:data-url="@{/khoa/edit/{id}(id=${rs.idKhoa})}"   data-toggle="modal" data-target="#modal-sm" class="edit"><i class="fas fa-edit" style="color: #FFD700"></i></a></th>
+<!--                                                <th style="text-align: center;"><a th:data-url="@{/}"><i class="fas fa-user-times" style="color: #FF0000"></i></a></th>-->
 
                                             </tr>
                                             </tbody>
-                                            <tfoot>
-                                            <tr>
-                                                <th>Stt</th>
-                                                <th>Tên Khóa</th>
-                                                <th>Năm Nhập Học</th>
-                                                <th>Trạng Thái</th>
-                                                <th style="color: #FFD700;text-align: center;">Sửa</th>
-                                                <th style="color: #FF0000;text-align: center;">Xóa</th>
-                                            </tr>
-                                            </tfoot>
+
                                         </table>
                                     </div>
                                     <!-- /.card-body -->
@@ -210,7 +201,7 @@
                                             Năm 3
                                         </option>
                                         <option value="4">
-                                            Đẫ Ra Trường
+                                            Đã Ra Trường
                                         </option>
                                     </select>
                                 </div>

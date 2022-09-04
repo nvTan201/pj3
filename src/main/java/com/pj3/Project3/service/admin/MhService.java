@@ -1,5 +1,6 @@
 package com.pj3.Project3.service.admin;
 
+import com.pj3.Project3.dto.hsLopAndKhoa;
 import com.pj3.Project3.model.monHoc;
 import com.pj3.Project3.repository.admin.IMhRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,9 @@ public class MhService{
     public List<monHoc> getAll() {
         return iMhRepository.findAll();
     }
-
+    public List<monHoc> getMonByLop(Long maLop) {
+        return iMhRepository.getMonByLop(maLop);
+    }
     public monHoc addMh(monHoc monHoc) {
         if(monHoc != null){
             return iMhRepository.save(monHoc);

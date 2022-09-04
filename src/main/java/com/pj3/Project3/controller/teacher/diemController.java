@@ -52,7 +52,10 @@ public class diemController {
         return rs ;
     }
 
-    @PostMapping("/add")
+//    @PostMapping("/add")
+@RequestMapping(value = "/add",
+        produces = "application/json",
+        method=RequestMethod.POST)
     public String addDiem(@RequestParam() @Nullable Long lop, @RequestParam() @Nullable Long mon,
                           @RequestParam() @Nullable Float dlt, @RequestParam() @Nullable Float dth,
                           @RequestParam() int trangThai, @RequestParam Long idHs,

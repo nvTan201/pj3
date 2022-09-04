@@ -17,4 +17,7 @@ public interface IGvRepository extends JpaRepository<giaoVien, Long> {
 
 //    @Query(value = "SELECT gv.ma_gv, gv.email_gv, gv.mat_khau_gv, gv.quyen FROM giaovien gv WHERE gv.email_gv = ?1", nativeQuery = true)
     Optional<giaoVien> findByEmailGv(String email);
+
+
+
 }

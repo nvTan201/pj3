@@ -1,5 +1,6 @@
 package com.pj3.Project3.controller.admin;
 
+import com.pj3.Project3.dto.LopAndKhoa;
 import com.pj3.Project3.model.khoa;
 import com.pj3.Project3.service.admin.KhoaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +13,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 @Controller
-@RequestMapping("khoa")
+@RequestMapping("/khoa")
 public class khoaController {
 
     @Autowired
@@ -26,11 +28,23 @@ public class khoaController {
         model.addAttribute("rs",rs);
         return "admin/khoa";
     }
-
+    public boolean checkLop(String tenKhoa) {
+        List<khoa> rs = khoaService.getAllKhoa();
+        AtomicBoolean check= new AtomicBoolean(true);
+        rs.forEach((element)->{
+            if (element.getTenKhoa().equals(tenKhoa)){
+                check.set(false);
+            }
+        });
+        return check.get();
+    }
     @PostMapping("/add")
     public String add(Model model, @RequestParam() String name, @DateTimeFormat(pattern="yyyy-MM-dd") Date date, @RequestParam int hoc){
-        khoa rs = new khoa(name,date,hoc);
-        khoaService.addKhoa(rs);
+       boolean check = this.checkLop(name);
+       if (check){
+           khoa rs = new khoa(name,date,hoc);
+           khoaService.addKhoa(rs);
+       }
         return "redirect:/khoa/index";
     }
 

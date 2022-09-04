@@ -57,14 +57,14 @@
                         <option th:each="lops , item:${lops}" th:value="${lops.getMa_lop()}" th:selected="${lop.maLop==lops.getMa_lop()}" th:utext="${lops.getTen_lop()}+${lops.getTen_khoa()}">
                     </select>
                 </div>
-                <div class="form-group">
-                    <label>Chủ Nghiệm</label>
-                    <br>
-                    <input type="radio" name="chuNghiem" value="1"> giáo viên chủ nghiệm
-                    <br>
-                    <input type="radio" name="chuNghiem" value="0"> giáo viên bộ môn
-                    <br>
-                </div>
+<!--                <div class="form-group">-->
+<!--                    <label>Chủ Nghiệm</label>-->
+<!--&lt;!&ndash;                    <br>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <input type="radio" name="chuNghiem" value="1"> giáo viên chủ nghiệm&ndash;&gt;-->
+<!--&lt;!&ndash;                    <br>&ndash;&gt;-->
+<!--                    <input type="radio" name="chuNghiem" value="0"> giáo viên bộ môn-->
+<!--                    <br>-->
+<!--                </div>-->
             </div>
             <input type="hidden" name="lop" th:value="${lop.maLop}">
             <!-- /.card-body -->

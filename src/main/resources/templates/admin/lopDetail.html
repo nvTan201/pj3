@@ -49,7 +49,7 @@
                         <th>Trạng Thái</th>
                         <th>Giáo Viên</th>
                         <th style="color: #FFD700">Sửa</th>
-                        <th style="color: #FF0000">Xóa</th>
+<!--                        <th style="color: #FF0000">Xóa</th>-->
                     </tr>
                     </thead>
                     <tbody>
@@ -62,27 +62,15 @@
                         <th th:text = "${rs.sdt}"></th>
                         <th th:text = "${rs.quyen==0?'Giáo Viên':'Giáo Vụ'}"></th>
                         <th><a th:href="@{/giao-vien/edit/{id}(id=${rs.maGv})}" class="btn btn-small"><i class="fas fa-edit" style="color: #FFD700"></i></a></th>
-                        <th>
-                            <form th:action="@{/giao-vien/destroy/{id}(id=${rs.maGv})}"
-                                  th:method="DELETE">
-                                <button class="btn btn-small"><i class="fas fa-user-times" style="color: #FF0000"></i></button>
-                            </form>
-                        </th>
+<!--                        <th>-->
+<!--                            <form th:action="@{/giao-vien/destroy/{id}(id=${rs.maGv})}"-->
+<!--                                  th:method="DELETE">-->
+<!--                                <button class="btn btn-small"><i class="fas fa-user-times" style="color: #FF0000"></i></button>-->
+<!--                            </form>-->
+<!--                        </th>-->
                     </tr>
                     </tbody>
-                    <tfoot>
-                    <tr>
-                        <th>Stt</th>
-                        <th>Họ Tên</th>
-                        <th>Ngày Sinh</th>
-                        <th>Giới Tính</th>
-                        <th>Email</th>
-                        <th>Sdt</th>
-                        <th>Quyền</th>
-                        <th style="color: #FFD700">Sửa</th>
-                        <th style="color: #FF0000">Xóa</th>
-                    </tr>
-                    </tfoot>
+
                 </table>
             </div>
             <!-- /.card-body -->

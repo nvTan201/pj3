@@ -14,5 +14,5 @@ public interface hsAndDiem {
     Float getDiem_thuc_hanh1();
     Float getDiem_tb();
     Integer getTrang_thai();
-    Integer getKet_qua();
+    Integer getKetQua();
 }

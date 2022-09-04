@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 @Controller
 @RequestMapping("/giang-day")
@@ -62,15 +63,28 @@ public class gdController {
 
     @PostMapping("add")
     public RedirectView add(@RequestParam() int namhoc, @RequestParam() String hocky, @RequestParam() giaoVien giaovien
-        , @RequestParam() monHoc mon, @RequestParam()int chuNghiem, @RequestParam() lop lop){
-        giangDay giangDay = new giangDay(namhoc, hocky, giaovien, mon, lop,0,chuNghiem);
-        gdService.addGd(giangDay, giaovien.getMaGv(), lop.getMaLop());
+        , @RequestParam() monHoc mon, @RequestParam() lop lop){
+        boolean check=  this.checkGV(giaovien.getMaGv(),mon.getMaMon(),lop.getMaLop());
         String url = "/giang-day/detail/" + lop.getMaLop();
-
+       if (check){
+           giangDay giangDay = new giangDay(namhoc, hocky, giaovien, mon, lop,0,0);
+           gdService.addGd(giangDay, giaovien.getMaGv(), lop.getMaLop());
+       }
         return new RedirectView(url);
+
 //        return giangDay;
     }
 
+    public boolean checkGV(Long giaovienId, Long monId, Long lopId ) {
+        List<giangDayGetAll> gv = gdService.getByIdLop(lopId);
+        AtomicBoolean check= new AtomicBoolean(true);
+        gv.forEach((element)->{
+            if (element.getMa_gv().equals(giaovienId) || element.getMa_mon().equals(monId) ){
+              check.set(false);
+            }
+        });
+            return check.get();
+    }
     @GetMapping("/edit/{id}")
     public String editGd(@PathVariable Long id, Model model){
         giangDayGetAll rs = gdService.findByIdGd(id);
@@ -86,9 +100,9 @@ public class gdController {
 
     @PutMapping("/edit/{id}")
     public RedirectView editGd(@RequestParam() int namhoc, @RequestParam() String hocky,@RequestParam() giaoVien giaovien
-            ,@RequestParam() monHoc mon,@RequestParam()int chuNghiem, @RequestParam() lop lop, @RequestParam int trangThai
+            ,@RequestParam() monHoc mon, @RequestParam() lop lop, @RequestParam int trangThai
             , @PathVariable Long id){
-        giangDay giangDay = new giangDay(namhoc, hocky, giaovien, mon, lop, trangThai, chuNghiem);
+        giangDay giangDay = new giangDay(namhoc, hocky, giaovien, mon, lop, trangThai, 0);
         gdService.editGd(id,giangDay);
         String url = "/giang-day/detail/" + lop.getMaLop();
         return new RedirectView(url);
