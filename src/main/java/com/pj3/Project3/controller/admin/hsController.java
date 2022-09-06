@@ -42,7 +42,9 @@ public class hsController {
     @GetMapping("/index")
     public String index(Model model){
         List<lop> lops = lopService.getAllLop();
+        List<LopAndKhoa> rs = lopService.displayLop();
         model.addAttribute("lops",lops);
+        model.addAttribute("rs",rs);
         return "admin/hocSinh";
     }
     @GetMapping("detail/{id}")
@@ -54,10 +56,12 @@ public class hsController {
         model.addAttribute("rs", rs);
         return "admin/hsDetail";
     }
-    @GetMapping("/add")
-    public String addHs(Model model){
+    @GetMapping("/add/{id}")
+    public String addHs(Model model,@PathVariable() Long id){
         List<LopAndKhoa> lop = lopService.displayLop();
+        lop rs = lopService.findByIdLop(id);
         model.addAttribute("lop",lop);
+        model.addAttribute("rs",rs);
         return "admin/addHocSinh";
     }
 
@@ -69,6 +73,7 @@ public class hsController {
         String pass = bCryptPasswordEncoder.encode("123");
         hocSinh hocSinh = new hocSinh(name, date, gioiTinh, email, pass, sdt, 1, lop);
         hsservice.addHs(hocSinh);
+
         String url = "/hoc-sinh/detail/" + lop.getMaLop();
 //        return "redirect:/hoc-sinh/detail" + lop.getTenLop();
         return new RedirectView(url);

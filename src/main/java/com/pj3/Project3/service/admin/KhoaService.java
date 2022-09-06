@@ -15,7 +15,7 @@ public class KhoaService{
     IKhoaRepository iKhoaRepository;
 
     public List<khoa> getAllKhoa() {
-        return iKhoaRepository.findAll();
+        return iKhoaRepository.getAllKhoadb();
     }
 
     public khoa addKhoa(khoa khoa) {
@@ -36,9 +36,11 @@ public class KhoaService{
 
     public khoa editKhoa(Long id , khoa khoa){
         khoa khoa1 = iKhoaRepository.getById(id);
-        if(khoa1 != null){
-            khoa1.setTenKhoa(khoa.getTenKhoa());
+        if(khoa != null){
 
+            khoa1.setTenKhoa(khoa.getTenKhoa());
+            khoa1.setHoc(khoa.getHoc());
+            khoa1.setNamNhapHoc(khoa.getNamNhapHoc());
             iKhoaRepository.save(khoa1);
         }
         return null;

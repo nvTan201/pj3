@@ -35,7 +35,9 @@ public class gdController {
     @GetMapping("/index")
     public String index(Model model){
         List<lop> lops = lopService.getAllLop();
+        List<LopAndKhoa> rs = lopService.displayLop();
         model.addAttribute("lops",lops);
+        model.addAttribute("rs",rs);
         return "admin/giangDay";
     }
 

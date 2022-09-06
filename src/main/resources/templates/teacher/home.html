@@ -28,9 +28,9 @@
                 <!-- ./col -->
                 <div class="col-lg-3 col-6" th:each="rs, item : ${rs}">
                     <!-- small box -->
-                    <div class="small-box bg-info">
+                    <div class="small-box bg-info" >
                         <div class="inner">
-                            <h3 th:utext="${rs.getTen_lop()}"></h3>
+                            <h3 th:utext="${rs.getTen_lop()}+${rs.getTen_khoa()}"></h3>
                             <p th:text="${rs.getTen_mon()}"></p>
                         </div>
                         <div class="icon">

@@ -54,8 +54,11 @@ public class mhController {
 
     @PutMapping("/edit/{id}")
     public String edit(@PathVariable("id") Long id, @RequestParam() String name){
-        monHoc monHoc = new monHoc(name);
-        mhService.editMh(id,monHoc);
+        boolean check= this.checkMon(name);
+        if(check){
+            monHoc monHoc = new monHoc(name);
+            mhService.editMh(id,monHoc);
+        }
         return "redirect:/mon-hoc/index";
     }
 

@@ -61,7 +61,7 @@
                                 </div>
                                 <!-- /.card-header -->
                                 <div class="card-body">
-                                    <table id="example1" class="table table-bordered table-striped">
+                                    <table id="example1" class="table table-bordered table-striped" >
                                         <thead>
                                         <tr>
                                             <th>Stt</th>
@@ -71,11 +71,10 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr th:each="rs , item : ${rs}">
-                                            <th th:text = "${item.index+1}"></th>
-                                            <th th:text = "${rs.getTen_lop()}+${rs.getTen_khoa()}"></th>
-                                            <th style="text-align: center;"><a th:data-url="@{/lop/edit/{id}(id=${rs.getMa_lop()})}" data-toggle="modal" data-target="#modal-sm" class="edit"><i class="fas fa-edit" style="color: #FFD700"></i></a></th>
-<!--                                            <th style="text-align: center;"><a th:href="@{/}"><i class="fas fa-user-times" style="color: #FF0000"></i></a></th>-->
+                                        <tr th:each="list , item : ${list}">
+                                            <td th:text = "${item.index+1}"></td>
+                                            <td th:text = "${list}"></td>
+                                            <td th:each="rs , item : ${rs}" style="text-align: center;"><a th:data-url="@{/lop/edit/{id}(id=${rs.getMa_lop()})}" data-toggle="modal" data-target="#modal-sm" class="edit"><i class="fas fa-edit" style="color: #FFD700"></i></a></td>
                                         </tr>
                                         </tbody>
 

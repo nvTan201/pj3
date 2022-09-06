@@ -1,5 +1,6 @@
 package com.pj3.Project3.controller.teacher;
 
+import com.pj3.Project3.dto.LopAndKhoa;
 import com.pj3.Project3.dto.giangDayGetAll;
 import com.pj3.Project3.dto.hsAndDiem;
 import com.pj3.Project3.model.giaoVien;
@@ -45,7 +46,9 @@ public class lopGvController {
         giaoVien gv = gvService.findOne(email);
         Long id = gv.getMaGv();
         List<giangDayGetAll> rs = gdService.findGdByGv(id,nh);
+        List<LopAndKhoa> rs1 = lopService.displayLop();
         model.addAttribute("rs", rs);
+        model.addAttribute("rs1", rs1);
         return "teacher/home";
     }
 
@@ -67,7 +70,6 @@ public class lopGvController {
 
     @GetMapping("/detail/{id}")
     public String detailClass(@PathVariable() Long id, HttpServletRequest request, Model model, Long mon){
-
         int nh = new Date().getYear()+1900;
         Principal userPrincipal = request.getUserPrincipal();
         String email = userPrincipal.getName();

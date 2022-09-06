@@ -25,17 +25,17 @@
         <div class="container-fluid">
             <!-- Small boxes (Stat box) -->
             <div class="row">
-                <!-- ./col -->
-                <div class="col-lg-3 col-6" th:each="lops, item : ${lops}">
+                <!-- ./colth:each="lops, item : ${lops} ${lops.tenLop} -->
+                <div class="col-lg-3 col-6"  th:each="rs , item : ${rs}">
                     <!-- small box -->
                     <div class="small-box bg-success">
                         <div class="inner">
-                            <h3 th:utext="${lops.tenLop}"></h3>
+                            <h3 th:utext="${rs.getTen_lop()}+${rs.getTen_khoa()}"></h3>
                         </div>
                         <div class="icon">
                             <i class="ion ion-pie-graph"></i>
                         </div>
-                        <a th:href="@{/giang-day/detail/{id}(id=${lops.maLop})}" class="small-box-footer">Chi Tiết <i class="fas fa-arrow-circle-right"></i></a>
+                        <a th:href="@{/giang-day/detail/{id}(id=${rs.getMa_lop()})}" class="small-box-footer">Chi Tiết <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
             </div>

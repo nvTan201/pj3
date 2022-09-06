@@ -27,7 +27,9 @@ public interface IHsRepository extends JpaRepository<hocSinh, Long> {
             "WHERE hs.ma_lop = ?1", nativeQuery = true)
     List<hsAndDiem> findByHs(Long maLop);
 
-    @Query(value = "SELECT d.diem_ly_thuyet,d.diem_ly_thuyet1,d.diem_thuc_hanh,d.diem_thuc_hanh1,d.diem_tb,d.ket_qua,d.ma_hs,d.ma_gd AS maGd, hs.ho_ten_hs,gd.ma_gd as ma_gd FROM diem d INNER JOIN giangday gd ON d.ma_gd = gd.ma_gd " +
+    @Query(value = "SELECT hs.ma_hs, hs.ho_ten_hs, hs.ngay_sinh, hs.gioi_tinh, +\n" +
+            "d.ma_diem, d.diem_ly_thuyet, d.diem_ly_thuyet1, d.diem_thuc_hanh, d.diem_thuc_hanh1, d.diem_tb, d.trang_thai, d.ket_qua \n" +
+            "FROM diem d INNER JOIN giangday gd ON d.ma_gd = gd.ma_gd " +
             "INNER JOIN hocsinh hs ON hs.ma_hs = d.ma_hs WHERE gd.ma_lop = ?1 AND gd.ma_mon = ?2", nativeQuery = true)
     List<hsAndDiem> findHsByMon(Long lop,Long mon);
 }

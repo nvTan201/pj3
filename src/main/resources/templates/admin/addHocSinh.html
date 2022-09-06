@@ -44,15 +44,16 @@
                         <label>Email</label>
                         <input type="email" class="form-control" name="email" placeholder="Enter email">
                     </div>
-                    <div class="form-group">
-                        <label>lớp</label>
-                        <select class="form-control select2" style="width: 100%;" name="lop">
-                            <option disabled selected="selected">chọn lớp</option>
+                    <div class="form-group" th:each="rs , item:${rs}">
+<!--                        <label>lớp</label>-->
+                        <input type="hidden" name="lop" th:value="${rs.maLop}">
+<!--           th:each="lop , item:${lop}"             <select class="form-control select2" style="width: 100%;" name="lop">-->
+<!--&lt;!&ndash;                            <option disabled selected="selected">chọn lớp</option>&ndash;&gt;-->
 
-                            <option th:each="lop , item:${lop}" th:value="${lop.getMa_lop()}" th:utext="${lop.getTen_lop()}+${lop.getTen_khoa()}">
+<!--                            <option th:each="lop , item:${lop}" th:value="${lop.getMa_lop()}" th:utext="${lop.getTen_lop()}+${lop.getTen_khoa()}">-->
 
-                            </option>
-                        </select>
+<!--&lt;!&ndash;                            </option>&ndash;&gt;-->
+<!--                        </select>-->
                     </div>
                 </div>
                 <!-- /.card-body -->
